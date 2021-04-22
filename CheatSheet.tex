@@ -1,0 +1,531 @@
+%Mathematical Methods for Physics II Cheat Sheet
+\documentclass[10pt,a4paper]{article}
+\usepackage[UTF8]{ctex}
+\usepackage{bm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{multicol}
+\setlength{\columnseprule}{1pt} 
+\usepackage{geometry}
+\geometry{left=.1cm,right=.1cm,top=.1cm,bottom=.1cm}
+\begin{document}
+\scriptsize
+\begin{multicols}{2}
+\textbf{偏微分方程的定解问题}\\
+\textbf{常微分方程}~含一元未知函数$u=u(x),x$及其若干阶导数$F(x,u,\frac{du}{dx},...,\frac{d^nu}{dx^n})=0$\\
+\textbf{偏微分方程}~含多元未知函$u(x_1,...,x_n)$及其若干阶偏导$F(x,u,\frac{\partial u}{\partial x_1}\\...,\frac{\partial^mu}{\partial x_1^{m_1}\cdots\partial x_n^{m_n}})=0$，其中$m=\sum_{i=1}^{n}m_n$--阶数\\
+\textbf{线性偏微分方程}与未知函数有关的部分仅是$u$及其偏导数的线性组合，否则(如含有$u_x^2,\cos u$)为非线性偏微分方程，仅含$\bm{x}$的项(如$\cos x$)不是非线性项，非线性项或造成混沌\\
+\textbf{齐次方程}~仅含对$u$的各种运算~~~~~~~~\textbf{非齐次方程}~含对$u$运算之外的驱动项$f(x,t)$或非零自由项\\
+\textbf{波动方程}\tiny（如张紧弦的机械波）对一小段$[a,b]$，垂直方向牛二$\rho\Delta s\frac{\partial^2u(x,t)}{\partial t^2}=f_0\Delta s+T_a\sin\alpha_a-T_b\sin\alpha_b$\\
+\indent水平方向牛二$-T_a\cos\alpha_a+T_b\cos\alpha_b=0$~~~~~~~~其中$\sin\alpha=\frac{\partial u}{\partial x},\Delta s=b-a,T_a=T_b=T_0$\\
+\indent\scriptsize$\Longrightarrow\frac{\partial^2u}{\partial t^2}=a^2\frac{\partial^2u}{\partial x^2}+f(x,t)$\tiny\\
+\indent其中$a^2=\frac{T_0}{\rho}$，$f(x,t)=\frac{f_0(x,t)}{\rho}$，$u(x,t)$--时刻$t$弦上$x$处振幅，$T_0$--张力，$\rho$--线密度，$f_0$--外力线密度\\
+$f=0$--无外力自由振动~~~~$f=const$--常外力强迫振动~~~~$f=-2b\frac{\partial u}{\partial t},2b=\frac{k}{\rho}$，$k$--阻力密度与速度之比--阻尼振动\scriptsize\\
+\indent$\frac{\partial^2u}{\partial t^2}=\left\{\begin{array}{ll}a^2(\frac{\partial^2u}{\partial x^2}+\frac{\partial^2u}{\partial y^2})+f(x,y,t)&\text{二维(如膜的振动)}\\\frac{\partial^2u}{\partial t^2}=a^2\nabla^2u+f(x,y,z,t)&\text{三维(如空气中的声波)}\end{array}\right.$\\
+\textbf{热传导方程}\tiny描述非平衡态及其转换的弛豫，如三种输运过程：速度梯度$\to$粘滞现象(动量传递)，温度梯度$\to$热传导现象(能量传递)，密度梯度$\to$扩散现象(粒子浓度传递)，微观机制：空间中分子能量、动量、浓度交换，宏观机制：傅里叶定律--场中任一点沿任一方向热流密度与该方向上温度梯度成正比，菲克定律$\bm{J}(\bm{r},t)=-\kappa\nabla u(\bm{r},t)$\\
+\indent(一维如均匀细杆热传导)对一小段$[x,x+\Delta x]$，$-kS\Delta t(\frac{\partial u}{\partial x}|_x-\frac{\partial u}{\partial x}|_{x+\Delta x})=c\rho S\Delta x\Delta u$\\
+\indent\scriptsize$\Longrightarrow\frac{\partial u}{\partial t}=a^2\frac{\partial^2u}{\partial x^2}$~~~~~~~~\tiny其中$S$--截面积，c--比热，$\rho$--体密度，$a^2=\frac{k}{c\rho}$\scriptsize\\
+\indent$\frac{\partial u}{\partial t}=\left\{\begin{array}{ll}a^2(\frac{\partial^2u}{\partial x^2}+\frac{\partial^2u}{\partial y^2})+f(x,y,t)&\text{二维}\\a^2\nabla^2u+f(x,y,z,t)&\text{三维}\end{array}\right.$~~~~~~~~\tiny其中$f$描述物体内热源\scriptsize\\
+\indent稳态下$\frac{\partial u}{\partial t}=0=\frac{\partial^2u}{\partial x^2}\Longrightarrow u=Ax+B$\\
+\indent\tiny一般方法：对体积元，热量$(t_2)-$热量$(t_2)=(t_1\sim t_2)$经边界流入热量$+(t_1\sim t_2)$内部生成热量\\
+\indent$\int_Vcu(x,y,z,t_2)\rho dV-\int_Vcu(*,t_1)\rho dV=\int_{t_1}^{t_2}[\int_{\partial V}k\nabla u\cdot d\bm{S}]dt+\int_{t_1}^{t_2}[\int_{V}f_0(*,t)\rho dV]dt$\\
+\indent$\Longrightarrow\int_{t_1}^{t_2}[\int_V\frac{\partial c\rho u}{\partial t}dV]dt=\int_{t_1}^{t_2}[\int_{V}\nabla\cdot(k\nabla u)+f_0\rho dV]dt\Longrightarrow\frac{\partial[c\rho u]}{\partial t}=\nabla\cdot(k\nabla u)+f_0\rho$\scriptsize\\
+\textbf{位势方程}\tiny当波动停止/温度平衡\scriptsize$-a^2\nabla^2u=f\left\{\begin{array}{ll}\neq0,\text{泊松方程}\\=0,\text{拉普拉斯}\end{array}\right.$\tiny如静电场$\nabla^2\phi=\left\{\begin{array}{ll}-\frac{\rho}{\epsilon_0}&\text{有源}\\0&\text{无源}\end{array}\right.$\scriptsize\\
+\textbf{二阶偏微分方程标准形式变换}$A(x,y)\frac{\partial^2u}{\partial x^2}+2B\frac{\partial^2u}{\partial x\partial y}+C\frac{\partial^2u}{\partial y^2}+D\frac{\partial u}{\partial x}+E\frac{\partial u}{\partial y}+Fu=G$\\
+\indent\tiny为使$a,c=0$，$\xi$和$\eta$需满足$A(\frac{\partial W}{\partial x})^2+2B\frac{\partial W}{\partial x}\frac{\partial W}{\partial y}+C(\frac{\partial W}{\partial y})^2=0$令$\frac{dy}{dx}=-\frac{\partial W}{\partial x}/\frac{\partial W}{\partial y}$得\\
+\indent特征方程$A(\frac{dy}{dx})^2-2B\frac{dy}{dx}+C=0$~~~~~~~~若$\Delta=B^2-AC>0$，解得特征线$y=y_1(x)+\gamma_1$或$y=y_2(x)+\gamma_2$\\
+\indent\indent(若$A$不恒为$0$)作变换$\xi(x,y)=y-y_1(x),\eta(x,y)=y-y_2(x)$\\
+\indent\indent(原方程化为\scriptsize$a\frac{\partial^2u}{\partial x^2}+2b\frac{\partial^2u}{\partial x\partial y}+c\frac{\partial^2u}{\partial y^2}+d\frac{\partial u}{\partial x}+e\frac{\partial u}{\partial y}+fu=g$\\
+\indent\indent其中$\left\{\begin{array}{ll}a=A(\frac{\partial\xi}{\partial x})^2+2B\frac{\partial\xi}{\partial x}\frac{\partial\xi}{\partial y}+C(\frac{\partial\xi}{\partial y})^2\\b=A\frac{\partial\xi}{\partial x}\frac{\partial\eta}{\partial x}+B(\frac{\partial\xi}{\partial x}\frac{\partial\eta}{\partial y}+\frac{\partial\xi}{\partial y}\frac{\partial\eta}{\partial x})+C\frac{\partial\xi}{\partial y}\frac{\partial\eta}{\partial y}\\c=A(\frac{\partial\eta}{\partial x})^2+2B\frac{\partial\eta}{\partial x}\frac{\partial\eta}{\partial y}+C(\frac{\partial\eta}{\partial y})^2\\d=A\frac{\partial^2\xi}{\partial x^2}+2B\frac{\partial^2\xi}{\partial x\partial y}+C\frac{\partial^2\xi}{\partial y^2}+D\frac{\partial\xi}{\partial x}+E\frac{\partial\xi}{\partial y}\\e=A\frac{\partial^2\eta}{\partial x^2}+2B\frac{\partial^2\eta}{\partial x\partial y}+C\frac{\partial^2\eta}{\partial y^2}+D\frac{\partial\eta}{\partial x}+E\frac{\partial\eta}{\partial y}\\f=F&g=G\end{array}\right.$)\\
+\indent\indent得双曲形方程$\frac{\partial^2u}{\partial\xi\partial\eta}=-\frac{1}{2b}(d\frac{\partial u}{\partial\xi}+e\frac{\partial u}{\partial\eta}+fu-g)$\\
+\indent若$\Delta=0$，解得特征线$\sqrt{A}\frac{\partial\xi}{\partial x}+\sqrt{C}\frac{\partial\xi}{\partial y}=0$，取$\eta$使$\frac{\partial(\xi,\eta)}{\partial(x,y)}\neq0$\\
+\indent\indent得抛物型方程$\sqrt{A}\frac{\partial\xi}{\partial x}+\sqrt{C}\frac{\partial\xi}{\partial y}=0$\\
+\indent若$\Delta<0$，解得特征线$y(x,y)=y_1(x,y)+iy_2(x,y)$，作变换$\xi=y_1,\eta=y_2$\\
+\indent\indent得椭圆形方程$\frac{\partial^2u}{\partial\xi^2}+\frac{\partial^2u}{\partial\eta^2}=-\frac{1}{a}(d\frac{\partial u}{\partial\xi}+e\frac{\partial u}{\partial\eta}+fu-g)$\\
+\tiny双曲型--一维弦振动方程~~~~~~~~抛物型--一维热传导方程~~~~~~~~椭圆型--二维拉普拉斯方程\\
+\textbf{叠加原理}~对齐次线性微分方程，若$u_1$和$u_2$均为其解，则线性组合$u=au_1+bu_2$亦为其解\\
+\indent对非齐次线性微分方程，若$u_1$为其解，$u_2$为相应齐次微分方程解，则叠加$u=u_1+au_2$亦为其解\scriptsize\\
+\tiny对自变量平面$R$上任一点$P$~为确定$P$点的值必须给定\textbf{依赖区}中点的值~~~~~~~~{影响区}中点的值随着$P$点的值的变化而变化\\
+\indent对\textbf{双曲型方程}，影响区--$P$点时间后两条特征线之间的区域，依赖区--$P$点时间前的两特征线之间的区域\\
+\indent对\textbf{抛物型方程}，过$P$点仅一条特征线，依赖区与影响区以特征线为界\\
+\indent对\textbf{椭圆型方程}，特征线是虚的，与特征线线相关的数值方法不适用，信息不受影响区和依赖区的限制，可以沿各个方向传播\\
+初始值$+$边界条件$=$定解条件~~~~~~~~定解条件$+$偏微分方程(泛定方程)$=$定解问题\\
+\textbf{初值(Cauchy)问题}~定解条件$=$初始条件~~~~~~~~\textbf{边值问题}~定解条件$=$边界条件~~~~~~~~~\textbf{混合问题}~定解条件$=$初始$+$边界条件\\
+%\textbf{初始条件~已知初始位移}$u|_{t=0}=\phi(x)$~~~~~~~~\textbf{已知初始速度}$u_t|_{t=0}=\psi(x),0\leq x\leq L$\\
+\textbf{第一类(Dirichlet)边界条件}~已知边界位移(温度/电势)$u|_S=f_1$\\
+\textbf{第二类(Neumann)边界条件}~已知边界速度(热流/电场)$\frac{\partial u}{\partial n}|_S=f_2$\\
+\textbf{第三类边界条件}~已知边界弹性受力(热交换)$(u+h\frac{\partial u}{\partial n})|_S=f_3$\scriptsize
+\end{multicols}
+
+\begin{multicols}{2}
+\textbf{Chap6分离变量法~~~~Chap7分离变量法的应用~~~~Chap8本征函数法}\\
+\tiny\textbf{分离变量法适用条件}(必要而不充分)泛定方程线性齐次，且边界条件齐次\\
+\textbf{步骤}~1. 对泛定方程$Lu(x,t)=0$写出形式解$u(x,t)=X(x)T(t)$~2. 分离变量得空间函数本征值问题$\left\{\begin{array}{l}F_xX_n(x)=\lambda_nX_n(x)\\\text{边界条件}\end{array}\right.\Longrightarrow\left\{\begin{array}{l}\text{本征值}\lambda_n\\\text{本征函数}X_n(x)\end{array}\right.$~3. 代入时间方程解出$T(t)$得本征解$u_n(x,t)=X_n(x)T_n(t)$~4. 利用叠加原理得一般解$u(x,t)=\sum_nu_n(x,t)$~5. 代入初始条件得待定系数\\
+\textbf{本征函数法基本步骤}~1. 选择空间函数的本征函数集$\{X_n(x)\}$，写出泛定方程的形式解$u(x,t)=\sum_nT_n(t)X_n(x)$~2. 将形式解代入泛定方程，直接得时间函数的常微分方程\\
+\textbf{有界弦的自由振动}$\left\{\begin{array}{ll}\frac{\partial^2u}{\partial t^2}=a^2\frac{\partial^2u}{\partial x^2}&0<x<L,t>0\\u|_{x=0}=0&u|_{x=L}=0\\u|_{t=0}=\phi(x)&u_t|_{t=0}=\psi(x)\end{array}\right.$设分离变量解$u(x,t)=X(x)T(t)$\\
+\indent代入原方程得$\frac{X''}{X}=\frac{T''}{aT}=-\lambda\Longrightarrow\left\{\begin{array}{l}X+\lambda X=0\\T''+\lambda a^2T=0\end{array}\right.$代入边界条件$X(0)T(t)=0,X(L)T(t)=0$\\
+\indent因$T(t)\neq0$，否则平庸解，故$X(0)=X(L)=0\Longrightarrow\left\{\begin{array}{ll}X''+\lambda X=0\\X(0)=X(L)=0\end{array}\right.$\\
+\indent当$\lambda=0$，通解为$X(x)=A+Bx$，由边界条件得$A=B=0$--平庸解\\
+\indent当$\lambda<0$，通解为$X(x)=A\exp(\sqrt{-\lambda}x)+B\exp(-\sqrt{-\lambda}x)$，同理亦得平庸解\\
+\indent当$\lambda>0$，通解为$X(x)=A\cos\sqrt{\lambda}x+B\sin\sqrt{\lambda}x$，由边界条件得\\
+\indent\indent本征值$\lambda_n=(\frac{n\pi}{L})^2$，本征解$X_n(x)=B_n\sin\frac{n\pi}{L}x$\\
+\indent$\lambda_n$代入时间方程得$T''(t)+(\frac{na\pi}{L})^2T=0$得$T_n(t)=C_n\cos\frac{na\pi}{L}t+D_n\sin\frac{na\pi}{L}t$\\
+\indent原方程本征解为$u_n(t)=X_n(x)T_n(t)=(C_n\cos\frac{na\pi}{L}t+D_n\sin\frac{na\pi}{L}t)\sin\frac{n\pi}{L}x$\\
+\indent一般解为$u(x,t)=\sum_{n=1}^{\infty}u_n(x,t)=\sum_{n=1}^{\infty}(C_n\cos\frac{na\pi}{L}t+D_n\sin\frac{na\pi}{L}t)\sin\frac{n\pi}{L}x$\\
+\indent代入初始条件$\left\{\begin{array}{l}u|_{t=0}=\phi(x)=\sum_{n=1}^{\infty}C_n\sin\frac{n\pi}{L}x\\u_t|_{t=0}=\psi(x)=\sum_{n=1}^{\infty}D_n\frac{na\pi}{L}\sin\frac{n\pi}{L}x\end{array}\right.$得$\left\{\begin{array}{l}C_n=\frac{2}{L}\int_0^L\phi(x)\sin\frac{n\pi}{L}xdx\\D_n=\frac{2}{n\pi a}\int_0^L\psi(x)\sin\frac{n\pi}{L}xdx\end{array}\right.$\\
+\indent\indent傅氏级数展$f(x)=\frac{a_0}{2}+\sum_{n=1}^{\infty}(a_n\cos\frac{2\pi n}{L}x+b\sin\frac{2\pi n}{L}x)$其中$\left\{\begin{array}{l}a_n=\frac{2}{L}\int_0^{L}f(x)\cos\frac{2\pi n}{L}xdx\\b_n=\frac{2}{L}\int_0^{L}f(x)\sin\frac{2\pi n}{L}xdx\\\end{array}\right.$\\
+\textbf{两端固定阻尼弦振动}$\left\{\begin{array}{ll}\frac{\partial^2u}{\partial t^2}=a^2\frac{\partial^2u}{\partial x^2}+f(x,t)&0<x<L,t>0\\u|_{x=0}=0&u|_{x=L}=0\\u|_{t=0}=\phi(x)&u_t|_{t=0}=\psi(x)\end{array}\right.$\\
+\indent其中阻尼项$f(x,t)=-\frac{k}{\rho}\frac{\partial u}{\partial t}=-2b\frac{\partial u}{\partial t}$~~~~分离变量得$\frac{X''}{X}=\frac{T''+2bT}{a^2T}=-\lambda$\\
+\indent特征方程$\left\{\begin{array}{l}X''+\lambda X(x)=0\\X(0)=X(L)=0\end{array}\right.\Longrightarrow\left\{\begin{array}{l}\lambda_n=(\frac{n\pi}{L})^2\\X_n(x)=B_n\sin\frac{n\pi}{L}x\end{array}\right.$时方$T''+2bT'+(\frac{n\pi a}{L})^2T=0$\\
+\indent设试探解$e^{-\lambda t}$满足方程$\lambda^2-2b\lambda+(\frac{n\pi a}{L})^2=0$，判别式$\Delta=b^2-(\frac{n\pi a}{L})^2$，并记$q_n=\sqrt{|(\frac{n\pi a}{L})^2-b^2|}$\\
+\indent当$\Delta>0$即$n<\frac{bL}{\pi a}$，$T_n(t)=\exp(-bt)(c_n\cosh q_nt+d_n\sinh q_nt)$\\
+\indent当$\Delta=0$即$n=\frac{nL}{\pi a}$，$T_n(t)=c_n\exp(-bt)+d_nt\exp(-bt)$\\
+\indent当$\Delta<0$即$n>\frac{bL}{\pi a}$，$T_n(t)=\exp(-bt)(c_n\cos q_nt+d_n\sin q_nt)$\\
+\indent欠阻尼情况$n>\frac{bL}{\pi a}$下，本征解为$u_n(t)=\exp(-bt)(C_n\cos q_nt+D_n\sin q_nt)\sin\frac{n\pi}{L}x$\\
+\indent一般解$u(x,t)=\sum_{n=1}^{\infty}u_n(x,t)$代入初始条件$\left\{\begin{array}{l}\phi(x)=\sum_{n=1}^{\infty}C_n\sin\frac{n\pi}{L}x\\\psi(x)=\sum_{n=1}^{\infty}(-C_nb+D_nq_n)\sin\frac{n\pi}{L}x\end{array}\right.$\\
+\indent\indent其中$\left\{\begin{array}{l}C_n=\frac{2}{L}\int_0^L\phi(x)\sin\frac{n\pi}{L}xdx\\D_n=\frac{b}{q_n}C_n+\frac{2}{Lq_n}\int_0^L\psi(x)\sin\frac{n\pi}{L}xdx\end{array}\right.$\\
+\textbf{两端固定弦自由振动(第二类边界条件)}$\left\{\begin{array}{ll}\frac{\partial^2u}{\partial t^2}=a^2\frac{\partial^2u}{\partial x^2}&0<x<L,t>0\\u|_{x=0}=0&u_x|_{x=L}=0\\u|_{t=0}=\phi(x)&u_t|_{t=0}=\psi(x)\end{array}\right.$分离变量$\left\{\begin{array}{l}X''+\lambda X=0\\X(0)=X'(L)=0\end{array}\right.$\\
+\indent考虑边界条件本征值$\lambda_n=\frac{(2n+1)^2\pi^2}{4l^2}$，本征函数$X(x)=B_n\sin\frac{(2n+1)^2\pi}{2l}x,n=0,1,\cdots$\\
+\indent代入时间方程得$T_n(t)=C_n'\cos\frac{(2n+1)\pi a}{2l}t+D_n'\sin\frac{(2n+1)\pi a}{2l}t$\\
+\indent一般解为$u(x,t)=\sum_{n=0}^{\infty}(C_n\cos\frac{(2n+1)\pi a}{2l}t+D_n\sin\frac{(2n+1)\pi a}{2l}t)\sin\frac{(2n+1)\pi}{2l}x$\\
+\indent代入初始条件得$\left\{\begin{array}{l}D_n\frac{4}{(2n+1)\pi a}\int_0^L\psi(x)\sin\frac{(2n+1)\pi}{2l}xdx\\C_n=\frac{2}{L}\int_0^L\phi(x)\sin\frac{(2n+1)\pi}{2l}xdx\end{array}\right.$\\
+\textbf{热传导问题(第二类边界条件)}$\left\{\begin{array}{ll}\frac{\partial u}{\partial t}=a^2\frac{\partial^2u}{\partial x^2}&0<x<L,t>0\\u|_{t=0}=\phi(x)&u_x|_{x=0}=0,u_x|_{x=L}=0\end{array}\right.$\\
+\indent解空间方程同前，本征值$\lambda_n=(\frac{n\pi}{L})^2$，本征函数$X_n(x)=A\cos\frac{n\pi}{L}x,n=1,2,\cdots$\\
+\indent代入时间方程$T_n(t)=c_n\exp[-(\frac{na\pi}{L})^2t]$一般解$u(x,t)=\frac{C_0}{2}+\sum_{n=1}^{\infty}C_n\exp[-(\frac{na\pi}{L})^2t]\cos\frac{n\pi}{L}x$\\
+\indent其中$C_n=\frac{2}{L}\int_0^L\phi(x)\cos\frac{n\pi}{L}xdx$~~~~~~~~当稳态，$u(x,\infty)=C_0$\\
+\textbf{热传导问题(第三类边界条件)}$\left\{\begin{array}{ll}\frac{\partial u}{\partial t}=a^2\frac{\partial^2u}{\partial x^2}&0<x<L,t>0\\u(0,t)=0,u(x,0)=\phi(x)&u(L,t)+hu_t(L,t)=0\end{array}\right.$\\
+\indent分离变量解空间方程$\left\{\begin{array}{ll}X''+\lambda X=0\\X(0)=0,X(L)+hX'(L)=0\end{array}\right.$~~~~~~~~当$\lambda=0$，$X=A+Bx$由边界条件得平庸解$A=B=0$~~~~当$\lambda<0$，$X=A\exp(\sqrt{-\lambda}x)+B\exp(-\sqrt{-\lambda}x)$由边界条件亦得平庸解$A=B=0$\\
+\indent当$\lambda>0$，$X_n(x)=A\cos\beta x+B_n\sin\beta x,\beta=\sqrt{\lambda},\tan\beta_nL=-\beta_nh$\\
+\indent代入时间方程得$T_n(t)=A_n\exp(-\beta_n^2a^2t)$，一般解$u(x,t)=\sum_{n=1}^{\infty}C_n\exp(-\beta_n^2a^2t)\sin\beta_n x$\\
+\indent其中$C_n=\frac{1}{L_n}\int_0^L\phi(x)\sin\beta_nxdx,L_n=\int_0^L\sin^2\beta_nxdx=\frac{L}{2}(1-\frac{\sin2\mu_n}{2\mu_n})$\\
+\textbf{二维自由波动方程}$\left\{\begin{array}{ll}\frac{\partial^2u}{\partial t^2}=c^2(\frac{\partial^2u}{\partial x^2}+\frac{\partial^2u}{\partial y^2})&0<x<a,0<y<b\\u|_{t=0}=\phi(x,y),u_t|_{t=0}=\psi(x,y)&u_{x=0}=u|_{x=a}=u|_{y=0}=u|_{y=b}=0\end{array}\right.\\
+\indent$首次分离变量$u(x,y,t)=V(x,y)T(t)\Longrightarrow\left\{\begin{array}{l}\frac{\partial^2V}{\partial x^2}+\frac{\partial^2V}{\partial y^2}+\lambda V=0\\T''+\lambda c^2T=0\end{array}\right.$再次$V(x,y)=X(x)Y(y)\\
+\indent\Longrightarrow\frac{X''}{X}=-\frac{Y''+\lambda Y}{Y}=-\mu\Longrightarrow\left\{\begin{array}{ll}X''+\mu X=0&X(0)=X(a)=0\\Y''+\nu Y=0&Y(0)=Y(b)=0\end{array}\right.,\nu=\lambda-\mu$\\
+\indent本征值$\left\{\begin{array}{l}\mu_m=(\frac{m\pi}{a})^2\\\nu_n=(\frac{n\pi}{b})^2\end{array}\right.m,n=1,2,\cdots$本征函数$\left\{\begin{array}{ll}X_m(x)=\sin\frac{m\pi}{a}x\\Y_n(y)=\sin\frac{n\pi}{b}y\end{array}\right.$\\
+\indent本征值$\lambda_{mn}=(\frac{m\pi}{a})^2+(\frac{n\pi}{b})^2$~~~~~~~~本征函数$V_{mn}(x,y)=\sin\frac{m\pi}{a}x\sin\frac{n\pi}{b}y$\\
+\indent一般解$u(x,y,t)=\sum_{m=1}^{\infty}\sum_{n=1}^{\infty}(C_{mn}\cos\omega_{mn}t+D_{mn}\sin\omega_{mn}t)\sin\frac{m\pi}{a}x\sin\frac{n\pi}{b}y$\\
+\indent其中$\left\{\begin{array}{l}C_{mn}=\frac{4}{ab}\int_0^b\int_0^a\phi(x,y)\sin\frac{m\pi}{a}x\sin\frac{n\pi}{b}ydxdy\\D_{mn}=\frac{4}{ab\omega_{mn}}\int_0^b\int_0^a\psi(x,y)\sin\frac{m\pi}{a}x\sin\frac{n\pi}{b}ydxdy\end{array}\right.$\\
+\textbf{二维热传导问题}$\left\{\begin{array}{ll}\frac{\partial u}{\partial t}=c^2(\frac{\partial^2u}{\partial x^2}+\frac{\partial^2u}{\partial y^2})&0<x<a,0<y<b,t>0\\u|_{t=0}=\phi(x,y)&u|_{x=0}=u|_{x=a}=u|_{y=0}=u|_{x=b}=0\end{array}\right.$两次分离变量同前\\
+\indent得$\omega_{mn}=c\pi\sqrt{(\frac{m}{a})^2+(\frac{n}{b})^2},u(x,y,t)=\sum_{m=1}^{\infty}\sum_{n=1}^{\infty}C_{mn}e^{-\omega_{mn}^2t}\sin\frac{m\pi}{a}x\sin\frac{n\pi}{b}y$\\
+\indent\indent其中$C_{mn}=\frac{4}{ab}\int_0^b\int_0^a\phi(x)\sin\frac{m\pi}{a}x\sin\frac{n\pi}{b}ydxdy$\\
+\textbf{直角坐标系下拉普拉斯方程}$\left\{\begin{array}{ll}\frac{\partial^2u}{\partial x^2}+\frac{\partial^2u}{\partial y^2}=0&0<x<a,0<y<b\\u(0,y)=u(a,y)=0&u(x,0)=0,u(x,b)=f_2(x)\end{array}\right.$~~~~分离变量得\\
+\indent空间方程$\left\{\begin{array}{l}X''+\lambda X=0\\X(0)=X(a)=0\end{array}\right.\Longrightarrow\left\{\begin{array}{l}\lambda_n=(\frac{n\pi}{a})^2\\X_n(x)=b_n\sin\frac{n\pi}{a}x\end{array}\right.$\\
+\indent代入时间方程$Y''-\lambda Y=0$得$Y_n(y)=c_n\cosh\frac{n\pi}{a}y+d_n\sinh\frac{n\pi}{a}y$\\
+\indent一般解$u(x,y)=\sum_{n=1}^{\infty}B_n\sin\frac{n\pi}{a}x\sinh\frac{n\pi}{a}y$其中$B_n=\frac{2}{a}csch\frac{n\pi b}{a}\int_0^af_2(x)\sin\frac{n\pi}{a}xdx$\\
+对\textbf{一般性拉普拉斯边值问题}$\left\{\begin{array}{ll}u(x,0)=f_1(x)&u(x,b)=f_2(x)\\u(0,y)=g_1(y)&u(a,y)=g_2(y)\end{array}\right.$有一般解$u(x,t)=\sum_{n=1}^{\infty}A_n\sin\frac{n\pi}{a}x\sinh\frac{n\pi}{a}(b-y)+\sum_{n=1}^{\infty}B_n\sin\frac{n\pi}{a}x\sinh\frac{n\pi}{a}y+\sum_{n=1}^{\infty}C_n\sinh\frac{n\pi}{b}(a-x)\sin\frac{n\pi}{b}y+\sum_{n=1}^{\infty}D_n\sinh\frac{n\pi}{b}x\sin\frac{n\pi}{b}y$\\
+\textbf{圆形域内二维拉普拉斯方程}$\left\{\begin{array}{l}\frac{1}{\rho}\frac{\partial}{\partial\rho}(\rho\frac{\partial u}{\partial\rho})+\frac{1}{\rho^2}\frac{\partial^2u}{\partial\theta^2}=0\\u(\rho_0,\theta)=f(\theta)\end{array}\right.$分离变量得$\frac{\rho^2R''+\rho R'}{R}=-\frac{\Phi''}{\Phi}=\lambda$\\
+\indent$\Longrightarrow\left\{\begin{array}{l}\text{角向方程 }\Phi''+\lambda\Phi=0\\\text{周期性边界条件 }\Phi(\theta+2\pi)=\Phi(\theta)\end{array}\right.~~~~~~~~\left\{\begin{array}{l}\text{径向方程(欧拉方程) }\rho^2R''+\rho R'-\lambda R=0\\\text{自然边界条件 }R(0)\text{有界}\end{array}\right.$\\
+\indent当$\lambda=0$，$\Phi(\theta)=A+B\theta=A$~~~~当$\lambda<0$，$\Phi(\theta)=A\exp(\sqrt{-\lambda}\theta)+B\exp(-\sqrt{-\lambda}\theta)$无法满足边界条件\\
+\indent当$\lambda>0$，$\phi(\theta)=A\sqrt{\lambda}\theta+B\sin\sqrt{\lambda}\theta,\sqrt{\lambda}=n$\\
+\indent$\left\{\begin{array}{l}R_0(\rho)=c_0+d_0\ln\rho\\R_n(\rho)=c_n\rho^n+d_n\rho^{-n},n=1,2,\cdots\end{array}\right.$考虑边界条件得$\left\{\begin{array}{l}R_0(\rho)=c_0\\R_n(\rho)=c_n\rho^n\end{array}\right.$即$R_n(\rho)=c_n\rho^n$\\
+\indent一般解$u(\rho,\theta)=\frac{a_0}{2}+\sum_{n=1}^{\infty}(a_n\cos n\theta+b_n\sin n\theta)$\\
+\indent其中$a_n=\frac{1}{\pi\rho_0^n}\int_0^{2\pi}f(\theta)\cos n\theta d\theta,b_n=\frac{1}{\pi\rho_0^n}\int_0^{2\pi}f(\theta)\sin n\theta d\theta$\\
+非齐次方程$+$齐次边界条件$+$任意初始条件，先解对应的齐次初始条件的非齐次方程，再与对应的相同边界条件的齐次方程解叠加\\
+\textbf{非齐次泛定方程$+$齐次初始条件(强迫弦振动)}$\left\{\begin{array}{ll}\frac{\partial^2v}{\partial t^2}=a^2\frac{\partial^2v}{\partial x^2}+f(x,t)&0<x<L,t>0\\v|_{x=0}=v|_{x=L}=0&v|_{t=0}=v_t|_{t=0}=0\end{array}\right.$以对应齐次问题的解试探$v(x,t)=\sum_{n=1}^{\infty}T_n(t)\sin\frac{n\pi}{L}x$原方程化为$\sum_{n=1}^{\infty}[T_n''(t)+(\frac{na\pi}{L})^2T_n(t)]\sin\frac{n\pi}{L}x=f(x)$\\
+\indent将非齐次项也按本征函数展开$f(x,t)=\sum_{n=1}^{\infty}f_n(t)\sin\frac{n\pi}{L}x$~~~~其中$f_n(t)=\frac{2}{L}\int_0^Lf(x,t)\sin\frac{n\pi}{L}xdx$\\
+\indent得一系列常微分方程问题$\left\{\begin{array}{l}T_n''(t)+(\frac{na\pi}{L})^2T_n(t)-f_n(t)=0\\T_n(0)=T_n'(0)=0\end{array}\right.$~~~~然后用拉普拉斯变换法求解\scriptsize\\
+\textbf{边界条件齐次化}~选辅助函数$u(x,t)=v(x,t)+\Omega(x,t)$使关于$v$的问题边界条件齐次\\
+\tiny\textbf{同时齐次化}(当自由项$f$和边界条件均不含$t$)$\left\{\begin{array}{l}\frac{\partial^2u}{\partial t^2}=a^2\frac{\partial^2u}{\partial x^2}+f(x)\\u|_{x=0}=b,u|_{x=L}=c\\u|_{t=0}=\phi(x),u_t|_{t=0}=\psi(x)\end{array}\right.$代入辅助函数得\\
+\indent$\left\{\begin{array}{l}\frac{\partial^2u}{\partial t^2}=a^2\frac{\partial^2u}{\partial x^2}+a^2\frac{\partial^2\Omega}{\partial x^2}+f(x)\\v(0)+\Omega(0)=b,v(L)+\Omega(L)=c\end{array}\right.$辅助函数满足$\left\{\begin{array}{l}\frac{\partial^2\Omega}{\partial t^2}+f(x)=0\\\Omega(0)=b,\Omega(L)=c\end{array}\right.$得\\
+\indent$\Omega(x)=b+\frac{c-b}{L}x+F(x)+\frac{F(0)+F(L)}{L}x-F(0),F(x)=-\frac{1}{a^2}\int[\int f(x)dx]dx$
+\end{multicols}
+
+\begin{multicols}{2}
+\textbf{Chap9施图姆-刘维尔理论及其应用}\\
+任一二阶线性偏微分方程$y''+a(x)y'+b(x)y+\lambda c(x)y=0$\\
+均可化为\textbf{施图姆-刘维尔型方程}$\frac{d}{dx}[k(x)\frac{dy}{dx}]-q(x)y+\lambda \rho(x)y=0$\\
+\indent其中$k(x)=e^{\int a(x)dx},-q(x)=b(x)e^{\int a(x)dx},\lambda$--本征值$,\rho(x)=c(x)e^{\int a(x)dx}$\\
+\tiny对$k(x),q(x),\rho(x)\geq0$的S-L方程，若$k(x),k'(x),q(x)$在$(a,b)$上连续，且最多以$x=a,x=b$为一阶极点，则存在无限多个本征值，相应有无限多个本征函数，且本征值均非负\\
+\indent对应不同本征值的本征函数在区间$[a,b]$带权重$\rho(x)$正交$\int_a^b\rho(x)y_m(x)y_n(x)dx=0,n\neq m$\\
+\indent本征函数集完备，即若函数$f(x)$满足广义Dirichlet条件：(1)具有连续一阶导和分段连续二阶导;(2)满足本征函数集满足的边界条件，则必可展开为绝对且一致收敛和广义傅里叶级数$f(x)=\sum_{n=1}^{\infty}f_ny_n(x)$(对于任意函数$f(x)$，则为平均收敛)\\
+\indent$f_n=\frac{1}{N_n^2}\int_a^b\rho(\xi)f(\xi)y_n(\xi)d\xi,N_n^2=\int_a^b\rho(\xi)[y_n(\xi)]^2d\xi$\scriptsize\\
+当$Q$因子$Q=k(x)[y_n(0)y_m'(0)-y_m(0)y_n'(0)]-k(L)[y_n(L)y_m'(L)-y_m(L)y_n'(L)]=0$,本征函数在区间$[0,L]$带权重$\rho(x)$正交\\
+\tiny\textbf{矢量空间}对$n$维矢量空间，选定一组基$\{e_i,i=1,2,\cdots,n\}$，空间中任一矢量$\bm{x}$均可用这组基的线性组合表示$\bm{x}=\sum_{i=1}^nx_ie_i$，满足空间加法和数乘封闭\\
+\textbf{内积}$(\bm{x},\bm{y})=\sum_{i=1}^{\infty}x_i^*y_i=(\bm{y},\bm{x})^*$~~~~~~~~\textbf{内积空间}：定义了内积的矢量空间，满足\\
+\indent 1. \textbf{对称性}$(\bm{x},\bm{y})=(\bm{y},\bm{x})^*$~~~~~~~~2. \textbf{线性}$(a\bm{x}+b\bm{z},\bm{y})=a(\bm{x},\bm{y})+b(\bm{z},\bm{y})$\\
+\indent 3. \textbf{正定性}$(\bm{x},\bm{x})\geq0,(\bm{x},\bm{x})=0\Leftrightarrow\bm{x}=0$\\
+\textbf{矢量模长}$(\bm{x},\bm{x})^{1/2}=||\bm{x}||$~~~~~~~~\textbf{归一化矢量}$\frac{\bm{x}}{||\bm{x}||}$~~~~~~~~\textbf{矢量正交}当$(\bm{x},\bm{y})$，两矢量正交\\
+\textbf{正交归一矢量集的完备性}：有限维矢量空间中，若一正交归一矢量集不包含在另一更大的正交归一矢量集中，则称该正交归一矢量集完备\\
+\textbf{函数空间}对加法($(f_1+f_2)(x)=f_1(x)+f_2(x)$)和乘法($(\alpha f)(x)=\alpha f(x)$)封闭的平方可积(积分$\int_a^b|f(x)|^2dx$存在)函数的集合\\
+\textbf{函数空间的内积}$(f_1,f_2)=\int_a^bf_1^*(x)f_2(x)dx$~~~~~~~~同样满足1. \textbf{对称性} 2. \textbf{线性} 3. \textbf{正定性}\\
+\textbf{函数空间函数集的完备性}对任一函数$f(x)$，展开级数$\sum_{i=1}^{\infty}c_if_i(x)$平均收敛于$f(x)$，即$\lim_{n\to\infty}\int_a^b|f(x)-\sum_{i=1}^{\infty}c_if_i(x)|^2dx=0$，称正交归一函数集$\{f_i,i=1,2,\cdots\}$完备\scriptsize\\
+\textbf{广义函数内积}$(f_1,f_2)=\int_a^b\rho(x)f_1^*(x)f_2(x)dx$\\
+\textbf{伴算符} $L$和$M$为定义在一定函数空间的微分算符，若对$\forall u,v$恒有$(v,Lu)=(Mv,u)$即$\int_a^bv^*(Lu)dx=\int_a^b(Mv)^*udx$，则称$M$是$L$的伴算符\\
+\textbf{自伴算符}：伴算符为自身的算符，即对$\forall u,v$恒有$(v,Lu)=(Lv,u)$\\
+若$L$为自伴算符，则方程$Ly(x)=\lambda y(x)$称自伴算符$L$的本征问题\\
+\textbf{自伴算符的性质} 1. \textbf{存在性}自伴算符的本征值必存在 2. 且为实数\\
+\indent3. \textbf{正交性}自伴算符的对应不同本征值的本征函数必正交\\
+\indent4. \textbf{完备性}自伴算符的本征函数构成一个完备函数集，即任一在区间$[a,b]$有连续二阶导且和自伴算符边界条件相同的函数$f(x)$，均可按本征函数$\{y_n(x)\}$展开成绝对且一致收敛的级数\\
+\indent$f(x)=\sum_{n=1}^{\infty}c_nf_n(x)$，其中$c_n=\frac{\int_a^bf(x)y_n^*(x)dx}{\int_a^by_n(x)y_n^*(x)dx}$\\
+算符自伴性与本征值问题有解之间的关系：充分不必要，如$L$是自伴算符，$iL$必非自伴算符，但$i\lambda$是$iL$的本征值\\
+非自伴算符的本征值不一定是实数，本征函数也不一定具有正交性\\
+引入算符$L=-\frac{d}{dx}[k(x)\frac{d}{dx}]+q(x)$，S-L方程化为$Ly=\lambda\rho(x)y$\\
+令$u(x)=\sqrt{\rho(x)}y(x)$，S-L方程化为$L'u(x)=\lambda u(x)$，其中$L'=-\frac{d}{dx}[\phi(x)\frac{d}{dx}]+\psi(x),\phi(x)=\frac{k(x)}{\rho(x)},\psi(x)=-\frac{1}{\sqrt{\rho(x)}}\frac{d}{dx}[k(x)\frac{d}{dx}\frac{1}{\sqrt{\rho(x)}}]+\frac{q(x)}{\rho(x)}$\\
+在边界条件$\phi(x)(u_1^*\frac{du_2}{dx}-u_2\frac{u_1^*}{dx})|_a^b=0$下，$L'$是自伴算符\\
+在边界条件$p(x)(y_1^*\frac{dy_2}{dx}-y_2\frac{dy_1^*}{dx})|_a^b=0$下，$L$是自伴算符
+\end{multicols}
+
+\begin{multicols}{2}
+\textbf{Chap10行波法}\\
+\textbf{一阶线性常微分方程}$\frac{dy}{dx}+P(x)y=Q(x)$的通解为$y=e^{-\int P(x)dx}[\int Q(x)e^{\int P(x)dx}dx+C]$\\
+\textbf{特征线法解含两个自变量的一阶线性常微分方程}$a(x,y)\frac{\partial u}{\partial x}+b(x,y)\frac{\partial u}{\partial y}+c(x,y)u=f(x,y)$\\
+\indent由特征方程$a(x,y)dy-b(x,y)dx=0$解得特征线$y=y(x)+C$\\
+\indent做变换$\xi=y-y(x)$，取$\eta$使$\frac{\partial(\xi,\eta)}{\partial(x,y)}\neq0$(或直接做代换$y=y(x)$)\\
+\indent原方程化为仅含一个自变量的一阶常微分方程$(a\frac{\partial\eta}{\partial x}+b\frac{\partial\eta}{\partial y})\frac{\partial u}{\partial \eta}+cu=f$\\
+\indent求解得$u(\xi,\eta)$(积分常数中含$\xi$)，回代并结合初始条件得到$u(x,y)$\\
+\textbf{二阶线性偏微分方程降阶求解}(波动方程)$\frac{\partial^2u}{\partial t^2}-a^2\frac{\partial^2u}{\partial x^2}=(\frac{\partial}{\partial t}+a\frac{\partial}{\partial x})(\frac{\partial}{\partial t}-a\frac{\partial}{\partial x})u=0$\\
+\indent$\Longrightarrow\left\{\begin{array}{l}\frac{\partial u}{\partial t}-\frac{\partial u}{\partial x}=v\\\frac{\partial v}{\partial t}+a\frac{\partial v}{\partial x}=0\end{array}\right.$~~~~~~~~还可化成标准形式(双曲型)两次积分并结合初始条件求解\\
+\textbf{波动方程Cauchy问题}(无界弦自由振动)$\left\{\begin{array}{ll}\frac{\partial^2u}{\partial t^2}=a^2\frac{\partial^2u}{\partial x^2}&-\infty<x<+\infty,t>0\\u|_{t=0}=\phi(x)&\frac{\partial u}{\partial t}|_{t=0}=\psi(x)\end{array}\right.$\\
+\indent通解为达朗贝尔公式$u(x,t)=f_1(x+at)+f_2(x-at)\\=[\frac{1}{2}\phi(x+at)+\frac{1}{2a}\int_0^{x+at}\psi(\xi)d\xi+\frac{C}{2}]+[\frac{1}{2}\phi(x-at)-\frac{1}{2a}\int_0^{x-at}\psi(\xi)d\xi-\frac{C}{2}]\\=\frac{1}{2}[\phi(x+at)+\phi(x-at)]+\frac{1}{2a}\int_{x-at}^{x+at}\psi(\xi)d\xi$\\
+特解$u(x,t)$仅取决于\textbf{依赖区间}$[x-at,x+at]$上的初始条件\\
+\textbf{决定区域}的边界为$x-at=X_1,x+at=X_2,t>0$\\
+区间$[X_1,X_2]$\textbf{影响区域}的边界为$x=X_1-at,x=X_2+at,t>0$\\
+\indent\tiny边界的平行线为特征线$x+at=C_1(C_1\geq X_1),x-at=C_2(C_2\leq X_2)$\scriptsize\\
+\textbf{半无界弦振动达朗贝尔解法~端点固定}$\left\{\begin{array}{lll}\frac{\partial^2u}{\partial t^2}=a^2\frac{\partial^2u}{\partial x^2}&0<x<\infty&t>0\\u(x,0)=\phi(x)&u_t(x,0)=\psi(x)&u(0,t)=0\end{array}\right.$\\
+\indent将$\phi(x)$和$\psi(x)$在实轴上作奇延拓化为无界弦的自由振动问题得\\
+\indent在端点条件影响区$(x\geq0,x-at<0)$：$u(x,t)=\frac{1}{2}[\phi(x+at)-\phi(at-x)]+\frac{1}{2a}\int_{at-x}^{x+at}\psi(\xi)d\xi$\\
+\indent在初始条件决定区$(x\geq0,x-at\geq0)$：$u(x,t)=\frac{1}{2}[\phi(x+at)+\phi(x-at)]+\frac{1}{2a}\int_{x-at}^{x+at}\psi(\xi)d\xi$\\
+\indent\textbf{端点自由}$\left\{\begin{array}{lll}\frac{\partial^2u}{\partial t^2}=a^2\frac{\partial^2u}{\partial x^2}&0<x<\infty&t>0\\u(x,0)=\phi(x)&u_t(x,0)=\psi(x)&u_t(0,t)=0\end{array}\right.$\\
+\indent对$\phi(x)$和$\psi(x)$在实轴上做偶延拓化为无界弦的自由振动问题得\\
+\indent在$x\geq0,x-at<0$：$u(x,t)=\frac{1}{2}[\phi(x+at)+\phi(at-x)]+\frac{1}{2a}[\int_0^{x+at}\psi(\xi)d\xi+\int_0^{at-x}\psi(\xi)d\xi]$\\
+\indent在$x\geq0,x-at\geq0$：$u(x,t)=\frac{1}{2}[\phi(x+at)+\phi(x-at)]+\frac{1}{2a}\int_{x-at}^{x+at}\psi(\xi)d\xi$\\
+\indent\textbf{端点受迫运动}$\left\{\begin{array}{lll}\frac{\partial^2u}{\partial t^2}=a^2\frac{\partial^2u}{\partial x^2}&0<x<\infty&t>0\\u(x,0)=\phi(x)&u_t(x,0)=\psi(x)&u(0,t)=\mu(t)\end{array}\right.$先解\\
+\indent$\left\{\begin{array}{ll}\frac{\partial^2w}{\partial t^2}=a^2\frac{\partial^2w}{\partial x^2}\\w(x,0)=w_t(x,0)=0&w(0,t)=\mu(t)\end{array}\right.$得$w=\left\{\begin{array}{ll}\mu(-\frac{x-at}{a})&x-at<0\\0&x-at\geq0\end{array}\right.$\\
+\indent再与对应端点固定问题解$v$叠加即得原端点受迫振动问题的解$u(x,t)=v(x,t)+w(x,t)$\\
+\indent在$x\geq0,x-at<0$：$u(x,t)=\frac{1}{2}[\phi(x+at)-\phi(at-x)]+\frac{1}{2a}\int_{at-x}^{x+at}\psi(\xi)d\xi+u(t-\frac{x}{a})$\\
+\indent在$x\geq0,x-at\geq0$：$u(x,t)=\frac{1}{2}[\phi(x+at)+\phi(x-at)]+\frac{1}{2a}\int_{x-at}^{x+at}\psi(\xi)d\xi+0$\\
+\textbf{积分微商定理}~若$U(x)=\int_a^xf(x,\tau)d\tau$，则$\frac{d}{dx}U(x)=f(x,x)+\int_a^x\frac{\partial}{\partial x}f(x,\tau)d\tau$\\
+\textbf{齐次化原理}$\left\{\begin{array}{ll}\frac{\partial^2u}{\partial t^2}=a^2\frac{\partial^2u}{\partial x^2}&-\infty<x<+\infty,t>0\\u(x,0)=\phi(x)&\frac{\partial u}{\partial t}(x,0)=\psi(x)\end{array}\right.$利用达朗贝尔公式解得\\
+\indent\indent$u_1(x,t)=\frac{1}{2}[\phi(x+at)+\phi(x-at)]+\frac{1}{2a}\int_{x-at}^{x+at}\psi(\xi)d\xi$\\
+\indent\indent$\left\{\begin{array}{ll}\frac{\partial^2w}{\partial t^2}=a^2\frac{\partial^2w}{\partial t^2}&-\infty<x<+\infty,t>\tau>0\\w|_{t-\tau=0}=0&\frac{\partial w}{\partial t}|_{t-\tau=0}=f(x,\tau)\end{array}\right.$的解为\\
+\indent\indent\indent$w(x,t;\tau)=\frac{1}{2a}\int_{x-a(t-\tau)}^{x+a(t-\tau)}f(\xi,\tau)d\xi$，由齐次化原理(积分微商定理)\\
+\indent$\left\{\begin{array}{ll}\frac{\partial^2u}{\partial t^2}=a^2\frac{\partial^2u}{\partial x^2}+f(x,t)&-\infty<x<+\infty,t>0\\u(x,0)=0&\frac{\partial u}{\partial t}(x,0)=0\end{array}\right.$的解为\\
+\indent\indent$u_2(x,t)=\int_0^tw(x,t;\tau)d\tau=\frac{1}{2a}\int_0^t\int_{x-a(t-\tau)}^{x+a(t-\tau)}f(\xi,\tau)d\xi d\tau$\\
+$\left\{\begin{array}{ll}\frac{\partial^2u}{\partial t^2}=a^2\frac{\partial^2u}{\partial x^2}+f(x,t)&-\infty<x<+\infty,t>0\\u(x,0)=\phi(x)&\frac{\partial u}{\partial t}(x,0)=\psi(x)\end{array}\right.$的解为前述两问题解的叠加$u(x,t)=u_1(x,t)+u_2(x,t)=\frac{1}{2}[\phi(x+at)+\phi(x-at)]+\frac{1}{2a}\int_{x-at}^{x+at}\psi(\xi)d\xi+\frac{1}{2a}\int_0^t\int_{x-a(t-\tau)}^{x+a(t-\tau)}f(\xi,\tau)d\xi d\tau$\\
+\textbf{高维波动方程的行波解法~中心对称的球面波}$\left\{\begin{array}{ll}\frac{\partial^2u}{\partial t^2}=a^2\nabla^2u&r,t>0\\u(r,0)=\phi(r)&u(r,0)=\psi(r)\end{array}\right.$\\
+\indent做代换$v=ru$得$\left\{\begin{array}{ll}\frac{\partial^2v}{\partial t^2}=a^2\frac{\partial^2u}{\partial r^2}&r,t>0\\u(r,0)=\phi(r)&u(r,0)=\psi(r)\end{array}\right.$利用达朗贝尔公式得\\
+\indent在端点条件影响区$(r\geq0,r-at<0)$：$u(r,t)=\frac{1}{2r}[(r+at)\phi(r+at)-(at-r)\phi(at-r)]+\frac{1}{2ar}\int_{at-r}^{r+at}\xi\psi(\xi)d\xi$\\
+\indent在初始条件决定区$(r\geq0,r-at\geq0)$：$u(r,t)=\frac{1}{2r}[(r+at)\phi(r+at)+(r-at)\phi(r-at)]+\frac{1}{2ar}\int_{r-at}^{r+at}\xi\psi(\xi)d\xi$\\
+\indent\textbf{一般形式的三维齐次波动方程(非球对称)}$\left\{\begin{array}{ll}\frac{\partial^2u}{\partial t^2}=a\nabla^2u&-\infty<x,y,z<+\infty,t>0\\u|_{t=0}=f(x,y,z)&u_t|_{t=0}=g(x,y,z)\end{array}\right.$\\
+\indent\textbf{泊松公式}为$u(x,y,z,t)=\frac{\partial}{\partial t}(\frac{t}{4\pi a^2t^2}\oint_{S_{at}^M}f(\xi,\eta,\zeta)dS)+\frac{t}{4\pi a^2t^2}\oint_{S_{at}^M}g(\xi,\eta,\zeta)dS=\frac{\partial}{\partial t}[\frac{t}{4\pi}\int_0^{2\pi}\int_0^{\pi}f(\xi,\eta,\zeta)\sin\theta d\theta d\phi]+\frac{t}{4\pi}\int_0^{2\pi}\int_0^{\pi}g(\xi,\eta,\zeta)\sin\theta d\theta d\phi$\\
+\indent其中$S_{at}^M$--以$(x,y,z)$为中心，$r=at$为半径的球面，$\xi=x+at\sin\theta\cos\phi,\eta=y+at\sin\sin\phi,\zeta=z+at\cos\theta$\\
+\tiny\textbf{齐次化原理}$\left\{\begin{array}{ll}u_{tt}=a\nabla^2u&\bm{x}\in R^3,t>0\\u(\bm{x},0)=f(\bm{x})&u_t(\bm{x},0)=g(\bm{x})\end{array}\right.$利用泊松公式解得\\
+\indent$u_1(\bm{x},t)=\frac{1}{4\pi a}\frac{\partial}{\partial t}\oint_{S_{at}^M}\frac{f(\xi,\eta,\zeta)}{r}dS+\frac{1}{4\pi a}\oint_{S_{at}^M}\frac{g(\xi,\eta,\zeta)}{r}dS$\\
+\indent\indent$\left\{\begin{array}{l}w_{tt}=a\nabla^2w\\w(\bm{x},0)=0,w_t|_{t=\tau}=F(\bm{x},\tau)\end{array}\right.$用泊松公式得$w(\bm{x},t;\tau)=\frac{1}{4\pi a}\oint_{S_{a(t-\tau)}^M}\frac{F(\xi,\eta,\zeta,\tau)}{a(t-\tau)}dS$\\
+\indent由齐次化原理得$\left\{\begin{array}{ll}u_{tt}=a^2\nabla^2u+F(\bm{x},t)&x\in R^3,t>0\\u(\bm{x},0)=f(\bm{x})&u_t(\bm{x},0)=g(\bm{x})\end{array}\right.$的解为$u_2(\bm{x},t)=$\\
+\indent\indent$\frac{1}{4\pi a}\int_0^t\oint_{S_{a(t-\tau)}^M}\frac{F(\xi,\eta,\zeta,\tau)}{a(t-\tau)}dS=\frac{1}{4\pi a^2}\int_0^{at}dr\oint_{S_r^M}\frac{F(\xi,\eta,\zeta,t-\frac{r}{a})}{r}dS,r=a(t-\tau)$\\
+\indent$\left\{\begin{array}{ll}u_{tt}=a^2\nabla^2u+F(\bm{x},t)&x\in R^3,t>0\\u(\bm{x},0)=f(\bm{x})&u_t(\bm{x},0)=g(\bm{x})\end{array}\right.$的解为上述两问题解的叠加\\
+\indent$u(\bm{x},t)=u_1(\bm{x},t)+u_2(\bm{x},t)=\frac{1}{4\pi a}\frac{\partial}{\partial t}\oint_{S_{at}^M}\frac{f(\xi,\eta,\zeta)}{r}dS+\frac{1}{4\pi a}\oint_{S_{at}^M}\frac{g(\xi,\eta,\zeta)}{r}dS+\frac{1}{4\pi a^2}\iiint_{r\leq at}\frac{F(\xi,\eta,\zeta,t-\frac{r}{a})}{r}dv$\scriptsize
+\end{multicols}
+
+\begin{multicols}{2}
+\textbf{Chap11积分变换法}\\
+\textbf{傅里叶变换}$F(\omega)=\mathcal{F}[f(t)]=\int_{-\infty}^{+\infty}f(t)e^{-i\omega t}dt,\omega\in(-\infty,+\infty)$\\
+\textbf{傅里叶逆变换}$f(t)=\mathcal{F}^{-1}[F(\omega)]=\frac{1}{2\pi}\int_{-\infty}^{+\infty}F(\omega)e^{i\omega t}d\omega$(变换存在的条件：通常要求$f(x)$绝对可积)\\
+\textbf{傅里叶变换的性质~线性}$\mathcal{F}[af_1(t)+bf_2(t)]=a\mathcal[f_1(t)]+b\mathcal[f_2(t)]$\\
+\indent\textbf{对称性}设$\mathcal{F}[f(t)]=F(\omega)$，则$\mathcal{F}[F(t)]=2\pi f(-\omega)$\\
+\indent\textbf{位移性}$\mathcal{F}[f(t-t_0)]=e^{-i\omega t_0}F(\omega)~~~~~~~~\mathcal{F}^{-1}[F(\omega-\omega_0)]=e^{i\omega_0t}f(t)$\\
+\indent\indent$\mathcal{F}[e^{i\omega_0t}f(t)]=F(\omega-\omega_0)$\\
+\indent\textbf{相似性}$\mathcal{F}[f(at)]=\frac{1}{|a|}F(\frac{\omega}{a})~~~~~~~~\mathcal{F}^{-1}[F(a\omega)]=\frac{1}{|a|}f(\frac{t}{a})(a\neq0)$\\
+\indent\textbf{微分性~原函数的微分性}~若$\lim_{|t|\to+\infty}f(t)=0$，则$\mathcal{F}[f'(t)]=i\omega F(\omega)$\\
+\indent\indent\indent\indent若$\lim_{|t|\to+\infty}f^{(k)}(t)=0$，则$\mathcal{F}[f^{(k)}(t)]=(i\omega)^kF(\omega)$\\
+\indent\indent\textbf{像函数的微分性}$F'(\omega)=-i\mathcal{F}[tf(t)]~~~~~~~~\mathcal{F}[tf(t)]=iF'(\omega)$\\
+\indent\textbf{积分性}~若$\lim_{t\to+\infty}\int_{-\infty}^tf(\tau)d\tau=0$，则$\mathcal{F}[\int_{-\infty}^tf(\tau)d\tau]=\frac{1}{i\omega}F(\omega)$\\
+\indent\textbf{卷积}$f_1(t)*f_2(t)=\int_{-\infty}^{+\infty}f_1(s)f_2(t-s)ds$\\
+\indent\textbf{卷积的性质~交换律}$f*g=g*f$~~~~~~~~\textbf{分配律}$f*(g+h)=f*g+f*h$\\
+\indent\indent\textbf{结合律}$f*(g*h)=(f*g)*h$~~~~~~~~\textbf{数乘}$A(f*g)=(Af)*g=f*(Ag),A$为常数\\
+\indent\indent\textbf{求导}$\frac{d}{dt}(f*g(t))=f'(t)*g(t)=f(t)*g'(t)~~~~~~~~f*\delta(t)=\delta*f(t)=f(t)$\\
+\indent\textbf{卷积定理}$\mathcal{F}[f*g]=F(\omega)\cdot G(\omega)~~~~~~~~\mathcal{F}[f\cdot g]=\frac{1}{2\pi}F(\omega)*G(\omega)$\\
+\textbf{用傅里叶变换解偏微分方程步骤}~1. 方程和条件两边同对定义在$(-\infty,+\infty)$的变量(一般是$x$)做傅里叶变换，像函数$u(x,t)\to U(\omega,t)$，初始条件$\phi(x)\to\Phi(\omega),\psi(x)\to\Psi(\omega)$\\
+\indent2. 解出$U(\omega,t)$~~~~~~~~3. $U(\omega,t)$反演得$u(x,t)$\\
+\textbf{拉普拉斯变换}$F(p)=\mathcal{L}[f(t)]=\int_a^{+\infty}f(t)e^{-pt}dt$\\
+\textbf{拉普拉斯逆变换}$f(t)=\mathcal{L}^{-1}[F(p)]=\frac{1}{2\pi i}\int_{\beta-i\infty}^{\beta+i\infty}F(p)e^{pt}dp$\\
+\textbf{拉普拉斯变换的性质~线性}$\mathcal{L}[af_1(t)+bf_2(t)]=aF_1(p)+bF_2(p)$\\
+\indent\textbf{相似性}设$F(p)=\mathcal{L}[f(t)]$，则$\mathcal{L}[f(at)]=\frac{1}{2}F(\frac{p}{a})~~~~~~~~\mathcal{L}^{-1}[F(ap)]=\frac{1}{a}f(\frac{t}{a})$\\
+\indent\textbf{延迟性}$\mathcal{L}[f(t-t_0)u(t-t_0)]=e^{-pt_0}F(p)$~~~~~~~~\textbf{平移性}$\mathcal{L}[e^{p_0t}f(t)]=F(p-p_0)$\\
+\indent\textbf{微分性}$\mathcal{L}[f'(t)]=pF(p)-f(0)~~~~~~~~F'(p)=-\mathcal{L}[tf(t)]~~~~~~~~F^{(n)}(p)=(-1)^n\mathcal{L}[t^nf(t)]$\\
+\indent\indent$\mathcal{L}[f^{(n)}]=p^nF(p)-p^{n-1}f(0)-p^{n-2}f'(0)-\cdots-f^{(n-1)}(0)$\\
+\indent\textbf{积分性}$\mathcal{L}[\int_0^tf(s)ds]=\frac{F(p)}{p}~~~~~~~~\int_p^{+\infty}F(s)ds=\mathcal{L}[\frac{f(t)}{t}]$\\
+\indent\textbf{周期性}若$f(t+T)=f(t)$，$\mathcal{L}[f(t)]=\frac{\int_0^Tf(t)e^{-pt}dt}{1-e^{-pT}}$\\
+\indent\textbf{在区间$[0,+\infty]$的卷积}$f_1(t)*f_2(t)=\int_0^tf_1(s)f_2(t-s)ds$\\
+\indent\textbf{卷积定理}$\mathcal{L}[f_1(t)*f_2(t)]=\mathcal{L}[f_1]\mathcal{L}[f_2]=F_1(p)F_2(p)$\\
+\textbf{用拉普拉斯变换解偏微分方程步骤}与用傅里叶变换相似，针对定义在$[0,\infty)$的变量
+\end{multicols}
+
+\begin{multicols}{2}
+\textbf{Chap12格林函数法}\\
+\textbf{格林函数}$G(\bm{r},\bm{r}_0)$~位于$\bm{r}_0$的单位点源在$\bm{r}$处产生的电势\\
+\tiny\textbf{步骤}~1. 建立格林函数$G$的定解问题~2. 解定解问题得格林函数~3. 解的积分即为原问题的解\\
+\textbf{无界三维泊松方程}$\nabla^2u(\bm{r})=\rho(\bm{r}),G(\bm{r};\bm{r}_0)=\frac{1}{4\pi|\bm{r}-\bm{r_0}|}\Longrightarrow u(\bm{r})=\iiint\rho(\bm{r}_0)G(\bm{r},\bm{r}_0)d\bm{r}_0$\textbf{无界二维泊松}$u_{xx}+u_{yy}=\rho(x,y),G(x,y;\xi,\eta)=-\frac{1}{2\pi}\ln\frac{1}{|\bm{r}-\bm{r}_0|}\Longrightarrow u(x,y)=\iint\rho(\bm{r}_0)G(x,y;\xi,\eta)d\xi d\eta$\\
+%\textbf{无界三维波动}$\left\{\begin{array}{ll}\frac{\partial^2w}{\partial t^2}=a^2\nabla^2w\\w|_{t=0}=\phi(x,y,z)&w_t|_{t=0}=\psi(x,y,z)\end{array}\right.$\\
+%\indent先解$\left\{\begin{array}{ll}\frac{\partial^2u}{\partial t^2}=a^2\nabla^2u\\u|_{t=0}=\phi(x,y,z)&u_t|_{t=0}=\psi(x,y,z)\end{array}\right.$\\
+\textbf{一维有界问题}$\left\{\begin{array}{l}\frac{\partial w}{\partial t}=a^2\frac{\partial^2w}{\partial x^2}+f(x,t)\\w|_{t=0}=\phi(x)w|_{x=0}=w|_{x=L}=0\end{array}\right.$先求$\left\{\begin{array}{ll}\frac{\partial w}{\partial t}=a^2\frac{\partial^2w}{\partial x^2}\\w|_{t=0}=\phi(x)&w|_{x=0}=w|_{x=L}=0\end{array}\right.$\\
+\indent$G(x,x_0,t)=\sum_{n=1}^{\infty}C_n\exp[-(\frac{na\pi}{L})^2t]\sin\frac{n\pi}{L}x,C_n=\frac{2}{L}\int_0^L\delta(x-x_0)\sin\frac{n\pi}{L}xdx=\frac{2}{L}\sin\frac{n\pi}{L}x_0,u(x,t)=\int_0^L\phi(x_0)G(x,x_0,t)dx_0=\frac{2}{L}\int_0^L[\sum_{n=1}^{\infty}e^{-(\frac{na\pi}{L})^2t}\sin\frac{n\pi}{L}x\sin\frac{n\pi}{L}x_0]\phi(x_0)dx_0$\\
+\indent再求$\left\{\begin{array}{l}\frac{\partial^2v}{\partial t^2}=a^2\nabla^2v+f(x,t)\\v|_{t=0}=u|_{x=0}=u|_{x=L}=0\end{array}\right.$即求$\left\{\begin{array}{ll}\frac{\partial^2u}{\partial t^2}=a^2\nabla^2u\\u|_{t=\tau}=f(x,\tau)&u|_{x=0}=u|_{x=L}=0\end{array}\right.$法同前，然后$v(x,t)=\int_0^tu(x,t,\tau)d\tau$\\
+得$w(x,t)=\int_0^L\phi(x_0)G(x,x_0,t)dt+\int_0^t\int_0^Lf(x_0,\tau)G(x_0,\tau)G(x,x_0,t-\tau)dx_0d\tau$\\
+\textbf{泊松方程边值问题基本积分公式}$u(\bm{r})=\iiint_VG(\bm{r},\bm{r}_0)f(\bm{r})dV+\iint_{\Sigma}[G(\bm{r},\bm{r}_0)\frac{\partial u(\bm{r})}{\partial n}-u(\bm{r})\frac{\partial G(\bm{r},\bm{r}_0)}{\partial n}]dS=\iiint_VG(\bm{r},\bm{r}_0)f(\bm{r}_0)dV_0+\iint_{\Sigma}[G(\bm{r},\bm{r}_0)\frac{\partial u(\bm{r}_0)}{\partial n_0}-u(\bm{r})\frac{\partial G(\bm{r},\bm{r}_0)}{\partial n_0}]dS_0$\\
+\textbf{泊松方程第一类边值问题}$u|_{\Sigma}=\phi(\bm{r}_{\Sigma}),u(\bm{r})=\iiint_VG(\bm{r},\bm{r}_0)f(\bm{r})dV-\iint_{\Sigma}u(\bm{r})\frac{\partial G(\bm{r},\bm{r}_0)}{\partial n}dS=\iiint_VG(\bm{r},\bm{r}_0)f(\bm{r}_0)dV_0-\iint_{\Sigma}u(\bm{r})\frac{\partial G(\bm{r},\bm{r}_0)}{\partial n_0}dS_0$\\
+\textbf{泊松方程第二类边值问题}$\frac{\partial u}{\partial n}|_{\Sigma}=\phi(\bm{r}_{\Sigma}),u(\bm{r})=\iiint_VG(\bm{r},\bm{r}_0)f(\bm{r})dV+\iint_{\Sigma}G(\bm{r},\bm{r}_0)\frac{\partial u(\bm{r})}{\partial n}dS=\iiint_VG(\bm{r},\bm{r}_0)f(\bm{r}_0)dV_0+\iint_{\Sigma}G(\bm{r},\bm{r}_0)\frac{\partial u(\bm{r}_0)}{\partial n_0}dS_0$(需要推广格林函数$\nabla^2G(\bm{r},\bm{r}_0)=-\delta(\bm{r}-\bm{r}_0)+\frac{1}{V_{\Omega}}$)\\
+\textbf{泊松方程第三类边值问题}$[\alpha u+\beta\frac{\partial u}{\partial n}]|_{Sigma}=0,u(\bm{r})=\iiint_VG(\bm{r},\bm{r}_0)f(\bm{r})dV+\frac{1}{\beta}\iint_{\Sigma}\phi(\bm{r})G(\bm{r},\bm{r}_0)dS=\iiint_VG(\bm{r},\bm{r}_0)f(\bm{r}_0)dV_0+\frac{1}{\beta}\iint_{\Sigma}\phi(\bm{r}_0)G(\bm{r},\bm{r}_0)dS_0$拉普拉斯类似\\
+\textbf{电像法}真空中一半径为$R_0$接地导体球，距球心$a(>R_0)$处一点电荷$Q$，镜像电荷$Q'=-\frac{R_0}{a}Q$位于距球心$b=\frac{R_0^2}{a}$处\scriptsize
+\end{multicols}
+
+\begin{multicols}{2}
+\textbf{Chap13贝塞尔函数}\\\tiny%起源于偏微分方程的求解，特别是极坐标系和柱坐标系的拉普拉斯方程\\
+%\textbf{几个微分方程的引入}对三维波动方程$\frac{\partial^2v}{\partial t^2}=a^2\nabla^2v$和三维热传导方程$\frac{\partial v}{\partial t}=a^2\nabla^2v$分离变量得\\
+%\indent$\nabla^2u(\bm{r})+k^2u(\bm{r})=0$~~~~~~~~在球坐标系中再次分离变量得
+%\begin{gather}
+%\label{13.2}\frac{d}{dr}(r^2\frac{dR}{dr})+(k^2r^2-\omega^2)R=0\\
+%\label{13.3}\frac{1}{\sin\theta}\frac{d}{d\theta}(\sin\theta\frac{d\Theta}{d\theta})+(\omega^2-\frac{m^2}{\sin^2\theta})\Theta=0\\
+%\Phi''+m^2\Phi=0
+%\end{gather}
+%\indent式(\ref{13.2})称球贝塞尔方程，当$k=0$化为欧拉方程$\frac{d}{dr}(r^2\frac{dR}{dr})-\omega^2R=0$\\
+%\indent式(\ref{13.3})令$x=\cos\theta,y(x)=\Theta(\theta)$化为连带勒让德方程$\frac{d}{dx}[(1-x^2)\frac{dy}{dx}]+(\omega^2-\frac{m^2}{1-x^2})y=0$\\
+%\indent\indent当$m=0$化为勒让德方程$\frac{d}{dx}[(1-x^2)\frac{dy}{dx}]+\omega^2y=0$~~~~~~~~原方程在柱坐标系中再次分离变量得
+%\begin{gather}
+%\label{13.4}\rho^2\frac{d^2R}{d\rho^2}+\rho\frac{dR}{d\rho}+[(k^2+\omega^2)\rho^2-m^2]R=0\\
+%\Phi''+m^2\phi=0\\
+%Z''-\omega^2Z=0
+%\end{gather}
+%\indent式(\ref{13.4})令$x=\sqrt{k^2+\omega^2}\rho,y(x)=R(\rho)$化为贝塞尔方程$x^2\frac{d^2y}{dx^2}+x\frac{dy}{dx}+(x^2-m^2)y=0$\\
+%亦可
+\textbf{从S-L型方程出发}$\frac{d}{dx}[k(x)\frac{dy}{dx}]-q(x)y+\lambda\rho(x)y=0$\\
+\indent当$k=1,q=0,\rho=1$化为亥姆霍兹方程$\frac{d^y}{dx^2}+\lambda y=0$\\
+\indent当$k=x,q=m^2/x,\rho=x$化为参数形式的贝塞尔方程，当$\lambda=1$化为贝塞尔方程\\
+\indent当$k=x^2,q=\omega^2,\rho=1$化为球贝塞尔方程$\frac{d}{dx}[x^2\frac{dy}{dx}]-\omega^2y+\lambda x^2y=0$，当$\lambda=0$化为欧拉方程\\
+\indent当$k=1-x^2,q=\frac{m^2}{1-x^2},\rho=1$化为连带勒让德方程$\frac{d}{dx}[(1-x^2)\frac{dy}{dx}]-\frac{m^2}{1-x^2}y+\lambda y=0$\\
+\indent\indent当$m=0$化为勒让德方程\scriptsize\\
+\textbf{伽马函数}$\Gamma(x)=\int_0^{\infty}e^{-t}t^{x-1}dt~(x>0)$\\
+\indent\textbf{基本性质}$\Gamma(x+1)=x\Gamma(x)$~~~~~~~~$\Gamma(n+1)=n!$~~~~~~~~$\Gamma(-n)=\infty~(n=0,1,2,\cdots)$\\
+\indent\indent$\Gamma(\frac{1}{2})=\sqrt{\pi}$~~~~~~~~$\Gamma(n+\frac{1}{2})=\frac{(2n)^2}{2^{2n}n!}\sqrt{\pi}$~~~~~~~~$\Gamma(n+\frac{1}{2}+1)=\frac{(2n+1)!}{2^{2n+1}n!}\sqrt{\pi}$\\
+\indent\indent对大的$n$有斯特林近似式$n!=\sqrt{2\pi n}n^ne^{-n}$~~~~~~~~\textbf{余元公式}$\Gamma(x)\Gamma(1-x)=\frac{\pi}{\sin\pi x}$\\
+\textbf{贝塔函数}$B(x,y)=\int_0^1t^{x-1}(1-t)^{y-1}dt=\frac{(x-1)!(y-1)!}{(x+y-1)!}$\\
+\textbf{贝塞尔方程的求解}$\nu$阶贝塞尔方程$x^2\frac{d^2y}{dx^2}+x\frac{dy}{dx}+(x^2-\nu^2)y=0$的解称贝塞尔函数\\
+%\indent\tiny亦可写成$y''+p(x)y'+q(x)y=0$，~~~~~~~~$p(x)=\frac{1}{x},~~q(x)=\frac{x^2-\nu^2}{x^2}$\\
+%\indent根据\textbf{弗罗贝尼乌斯法}，上述变系数方程满足$xp(x)=1,xq(x)=x^2-\nu^2$可在$x=0$附近展开为幂级数的条件，故\\
+%\indent其有广义幂级数解$y=\sum_{k=0}^{\infty}C_kx^{C+k},~~C_0\neq0$\\
+%\indent代入贝塞尔方程比较系数得
+%\begin{gather}
+%\label{13.5}C_0(C+\nu)(C-\nu)=0\\
+%\label{13.6}C_1[(C+1)^2-\nu^2]=0\\
+%\label{13.7}C_k[(C+k)^2-\nu^2]+C_{k-2}=0
+%\end{gather}
+%\indent由式(\ref{13.5})得$C=\pm\nu,~~\nu\geq0$\\
+%\indent若$C=\nu$，则$y=C_0\sum_{m=0}^{\infty}\frac{(-1)^m}{2^{2m}m!(1+\nu)(2+\nu)\cdots(m+\nu)}x^{2m+\nu}$\\
+%\indent\indent取$C_0=\frac{1}{2^{\nu}\Gamma(\nu+1)}$得\scriptsize\\
+$\nu$阶第一类贝氏函数$J_{\nu}(x)=\sum_{m=0}^{\infty}\frac{(-1)^m(\frac{x}{2})^{2m+\nu}}{m!\Gamma(m+\nu+1)}$~~~~~~~~$J_0(0)=1$~~$J_{\nu}(0)=0,(\nu>0)$\\
+\indent\indent当$\nu$取非负整数得整数阶贝氏函数$J_n(x)=\sum_{m=0}^{\infty}\frac{(-1)^m}{m!(m+n)!}(\frac{x}{2})^{2m+n}$\\
+\indent若$C=-\nu$，则得$J_{-\nu}(x)=\sum_{m=0}^{\infty}\frac{(-1)^m(\frac{x}{2})^{2m-\nu}}{m!\Gamma(m-\nu+1)}$\\
+\indent$J_{\nu}(x)$和$J_{-\nu}(x)$线性独立($\nu$非整数)
+%\indent\indent\tiny$J_{\frac{1}{2}}(x)=\sqrt{\frac{2}{\pi x}}\sin x$和$J_{-\frac{1}{2}}(x)=\sqrt{\frac{2}{\pi x}}\cos x$可佐证这一点\\
+%\indent\indent~~~~实际上因$1/\Gamma(m-n+1)=0,(m-n+1>0)$，故令$m=k+n$有\\
+%\indent\indent~~~~$J_{-n}(x)=(-1)^n\sum_{k=0}^{\infty}\frac{(-1)^k}{k!(k+n)!}(\frac{x}{2})$，故$J_n(x)=(-1)^nJ_{-n}(x)$，故\scriptsize\\
+但$J_n(x)$和$J_{-n}(x)$线性相关\\
+为构建与$J_n$线性无关的解，引入\textbf{诺依曼函数（第二类贝氏函数）}\\
+$Y_{\nu}=\left\{\begin{array}{ll}\frac{J_{\nu}(x)\cos\nu x-J_{-\nu}(x)}{\sin\nu x}\\\lim_{\alpha\to\nu}\frac{J_{\alpha}(x)\cos\alpha\pi-J_{-\alpha}(x)}{\sin\alpha\pi},&\nu\text{非整数}\end{array}\right.$\\
+\indent积分表示$Y_n(x)=\frac{1}{\pi}\int_0^{\pi}\sin(x\sin\theta-n\theta)d\theta-\frac{1}{\pi}\int_0^{\infty}[e^{nt}+(-1)^ne^{-nt}]e^{-x\sinh t}dt$\\
+%\tiny第二类贝氏函数级数展开形式$Y_n(x)=2/\pi(\ln(x/2)+\gamma)J_n(x)\\-1/\pi\sum_{k=0}^{n-1}\frac{(n-k-1)!}{k!}(\frac{x}{2})^{2k-n}-1/\pi\sum_{k=0}^{\infty}\frac{(-1)^k}{k!(n+k)!}[\Phi(k)+\Phi(n+k)](\frac{x}{2})^{2k+n}$\\
+%\indent其中欧拉常数$\gamma=\lim_{n\to\infty}(1+\frac{1}{2}+\cdots+\frac{1}{n}-\ln n)=0.577216\cdots$\scriptsize\\
+$\nu$阶贝塞尔方程通解$y(x)=\left\{\begin{array}{ll}AJ_{\nu}(x)+BY_{\nu}(x)\\AJ_{\nu}(x)+BJ_{-\nu}(x),&\nu\text{非整数}\end{array}\right.$\\
+\textbf{生成函数}级数展开式的系数是贝塞尔函数的函数$f(x,r)=\sum_nJ_n(x)r^n$\\
+\textbf{整数阶贝塞尔函数的生成函数}$\exp[\frac{x}{2}(r-\frac{1}{r})]=\sum_{n=-\infty}^{\infty}J_n(x)r^n$\\
+\textbf{递推公式}$(\forall\nu)\left\{\begin{array}{l}\frac{d}{dx}[x^{\nu}J_{\nu}(x)]=x^{\nu}J_{\nu-1}(x)\\\frac{d}{dx}[x^{-\nu}J_{\nu}(x)]=-x^{-\nu}J_{\nu+1}(x)\end{array}\right.$\\
+\indent$\frac{d}{dx}[J_0(x)]=-J_1(x)~~~~~~~~\frac{d}{dx}[xJ_1(x)]=xJ_0(x)$\\
+\indent$\left\{\begin{array}{l}J_{\nu}'(x)=\frac{1}{2}[J_{\nu-1}(x)-J_{\nu+1}(x)]\\J_{\nu-1}(x)+J_{\nu+1}(x)=\frac{2}{x}\nu J_{\nu}(x)\end{array}\right.\left\{\begin{array}{l}xJ_{\nu-1}(x)=\nu J_{\nu}(x)+xJ'_{\nu}(x)\\xJ_{\nu+1}(x)=\nu J_{\nu}(x)-xJ_{\nu}'(x)\end{array}\right.$\\
+\textbf{积分递推公式}$\left\{\begin{array}{l}\int x^{\nu+1}J_{\nu}(x)dx=x^{\nu+1}J_{\nu+1}(x)\\\int x^{-\nu+1}J_{\nu}(x)dx=-x^{-\nu+1}J_{\nu-1}(x)\end{array}\right.$\\
+\textbf{第二类贝氏函数递推公式与第一类相同}$\left\{\begin{array}{l}\frac{d}{dx}[x^{\nu}Y_{\nu}(x)]=x^{\nu}Y_{\nu-1}(x)\\\frac{d}{dx}[x^{-\nu}Y_{\nu}(x)]=-x^{-\nu}Y_{\nu+1}(x)\\Y_{\nu}'(x)=\frac{1}{2}[Y_{\nu-1}(x)-Y_{\nu+1}(x)]\\Y_{\nu-1}(x)+Y_{\nu+1}(x)=\frac{2\nu}{x}Y_{\nu}(x)\\xY_{\nu-1}(x)=\nu Y_{\nu}(x)+xY_{\nu}'(x)\\xY_{\nu+1}(x)=\nu Y_{\nu}(x)-xY_{\nu}'(x)\end{array}\right.$\\
+\indent\textbf{奇数阶贝氏函数}$\left\{\begin{array}{l}J_{n+\frac{1}{2}}(x)=(-1)^n\sqrt{\frac{2}{\pi}}x^{n+\frac{1}{2}}(\frac{1}{x}\frac{d}{dx})^n(\frac{\sin x}{x})\\J_{-(n+\frac{1}{2})}(x)=\sqrt{\frac{2}{\pi}}x^{n+\frac{1}{2}}(\frac{1}{x}\frac{d}{dx})^n(\frac{\cos x}{x})\end{array}\right.$\\
+\textbf{积分表示}$J_n(x)=\frac{1}{2\pi}\int_0^{\pi}\cos(x\sin\theta-n\theta)d\theta$\\
+\indent\scriptsize证明思路：通过整数贝塞尔函数生成函数令$r=e^{i\theta}$\\
+\indent比较实虚部得$\left\{\begin{array}{l}\cos(x\sin\theta)=\sum_{n=-\infty}^{\infty}J_n(x)\cos n\theta\\\sin(x\sin\theta)=\sum_{n=-\infty}^{\infty}J_n(x)\sin n\theta\end{array}\right.$\\
+\indent后两边同乘$\cos m\theta$或$\sin m\theta$并在$[0,\pi]$积分即得\scriptsize\\
+\indent三角函数贝赛尔级数展开式$\left\{\begin{array}{l}\cos x=J_0(x)+2\sum_{n=1}^{\infty}(-1)^nJ_{2n}(x)\\\sin x=2\sum_{n=0}^{\infty}(-1)^nJ_{2n+1}(x)\end{array}\right.$\\
+\textbf{渐进公式}$J_n(x)\approx\sqrt{\frac{2}{\pi x}}\cos(x-\frac{x}{4}-\frac{n\pi}{2})$\\
+参数形式的贝赛尔方程$x^2\frac{d^2y}{dx^2}+x\frac{dy}{dx}+(\lambda^2x^2-\nu^2)y=0$\\
+\indent其S-L形式为$\frac{d}{dx}(x\frac{dy}{dx})-\frac{\nu^2}{x}y+\lambda^2xy=0$~~~~~~~~通解为$y=AJ_{\nu}(\lambda x)+BY_{\nu}(\lambda x)$\\
+\indent递推公式$\left\{\begin{array}{l}\frac{d}{d(\lambda x)}[(\lambda x)^{-\nu}J_{\nu}(\lambda x)]=-(\lambda x)^{-\nu}J_{\nu+1}(\lambda x)\\\frac{d}{d(\lambda x)}[(\lambda x)^{\nu}J_{\nu}(\lambda x)]=(\lambda x)^{\nu}J_{\nu-1}(\lambda x)\end{array}\right.$\\
+\indent~~~~$\frac{d}{dx}J_0(\lambda x)=-\lambda J_1(\lambda x)$~~~~~~~~~~~~~~~~$\frac{d}{dx}[\frac{1}{x}J_1(\lambda x)]=-\frac{\lambda}{x}J_2(\lambda x)$\\
+\indent~~~~$\frac{d}{dx}[xJ_1(\lambda x)]=\lambda xJ_0(\lambda x)$~~~~~~~~~~~~~~~~$\frac{d}{dx}[x^2J_2(\lambda x)]=\lambda x^2J_1(x)$\\
+~~~~def~$\lambda_{\nu m}=\frac{\mu_{\nu m}}{a}$\tiny(前已将$[0,\mu_{\nu m}]$上$J_{\nu}(x)$对应到$[0,1]$)将$[0,1]$上的$J_{\nu}(\lambda_{\nu m}x)$对应到$[0,a]$上的$J(\lambda_{\nu m})$\scriptsize\\
+\textbf{正交性\&模值}$\int_0^axJ_{\nu}(\lambda_{\nu m}x)J_{\nu}(\lambda_{\nu k}x)dx=\frac{a^2}{2}J_{\nu+1}^2(\mu_{\nu m})\delta_{mk}$\\
+\indent当$a=1$化为$\int_0^1xJ_{\nu}(\mu_{\nu m}x)J_{\nu}(\mu_{\nu k}x)dx=\frac{1}{2}J_{\nu+1}^2(\mu_{\nu m})\delta_{mk}$\\
+\textbf{贝氏函数的完备性}$\left.\begin{array}{lr}\text{连续点}&f(x)\\\text{间断点}&\frac{f(x-0)+f(x+0)}{2}\end{array}\right\}=\sum_{m=1}^{\infty}A_mJ_{\nu}(\lambda_{\nu m}x)$\\
+\indent$\forall x\in(0,a)$~~~~~~~~其中$A_m=\frac{2}{a^2J_{\nu\pm1}^2(\mu_{\nu m})}\int_0^axJ_{\nu}(\lambda_{\nu m}x)f(x)dx$\\
+\textbf{球贝塞尔函数}$j_n(x)=\sqrt{\frac{\pi}{2x}}J_{n+\frac{1}{2}}(x)$\\
+\indent$y_{nm}(x)=j_n(\lambda_{nm}x)$是球贝氏方程\scriptsize$x^2y''+2xy'+[kx^2-n(n+1)]y=0$解\\
+\indent$j_0(x)=\frac{\sin x}{x}$~~~~~~~~$j_1(x)=\frac{\sin x}{x^2}-\frac{\cos x}{x}$~~~~~~~~$j_2(x)=(\frac{3}{x^2}-\frac{1}{x})\sin x-\frac{3}{x^2}\cos x$\\
+\textbf{递推公式}$\frac{d}{dx}[x^{n+1}j_n(x)]=x^{n+1}j_{n-1}(x)$~~~~~~~~$\frac{d}{dx}[x^{-n}j_n(x)]=-x^{-n}j_{n+1}(x)$\\
+\textbf{正交性\&模值}$\int_0^ax^2j_n(\lambda_{nm}x)j_n(\lambda_{nk}x)dx=\frac{a^2}{2}j_{n+1}^2(\mu_{n+\frac{1}{2}})\delta_{mk}$\\
+\textbf{Hankel函数}~~~~发散波$H_{\nu}^{(1)}(x)=J_{\nu}(x)+iN_{\nu}(x)\sim\sqrt{\frac{2}{\pi x}}\exp[i(x-\frac{\nu\pi}{2}-\frac{\pi}{4})]$\\
+\indent汇聚波$H_{\nu}^{(2)}(x)=J_{\nu}(x)-iN_{\nu}(x)\sim\sqrt{\frac{2}{\pi x}}\exp[-i(x-\frac{\nu\pi}{2}-\frac{\pi}{4})]$\\
+%\textbf{虚宗量贝氏方程}$x^2\frac{d^2R}{dx^2}+x\frac{dR}{dx}-(x^2+\nu^2)R=0$~~~~\tiny令$\xi=ix$化为$\xi^2y''+\xi y'+(\xi^2-\nu^2)y=0$得\scriptsize\\
+%\textbf{第一类虚宗量贝氏函数}$I_{\nu}(x)=(-i)^{\nu}J_{\nu}(ix)=\sum_{k=0}^{\infty}\frac{1}{k!\Gamma(\nu+k+1)}(\frac{x}{2})^{\nu+2k}$\\
+%\textbf{第二类虚宗量贝赛尔函数}(MacDonald函数)$K_{\nu}(x)=\frac{\pi}{2}\frac{I_{-\nu}(x)-I_{\nu}(x)}{\sin\pi\nu}$\\
+%虚宗量贝式方程的通解为$y(x)=\left\{\begin{array}{ll}CI_{\nu}(x)+DI_{-\nu}(x),&\nu\text{ 非整数}\\CI_{\nu}(x)+DK_{\nu}(x)\end{array}\right.$\\
+%当$m$为整数，$I_m(x)=I_{-m}(x)$~~~~~~~~$m$奇$I_m(x)$奇，$m$偶$I_m(x)$偶\\
+%$I_0(x)=1+\frac{x^2}{x^2}+\frac{x^4}{2^4(2!)^2}+\frac{x^6}{2^6(3!)^2}+\cdots$~~~~$I_0(0)=1$~~~~$I_m(0)=0(m>0)$\\
+%\tiny\textbf{递推公式}\scriptsize$\begin{array}{ll}I_{m-1}(x)-I_{m+1}(x)=\frac{2m}{x}I_m(x)&I_{m+1}(x)+I_{m-1}(x)=2I_m'(x)\\I_m'(x)+\frac{m}{x}I_m(x)=I_{m-1}(x)&I_m'(x)-\frac{m}{x}I_m(x)=I_{m+1}(x)\\K_{m+1}(x)-K_{m-1}(x)=\frac{2m}{x}K_m(x)&K_{m+1}(x)+K_{m-1}(x)=-2K_m'(x)\\K_m'(x)+\frac{m}{x}K_m(x)=-K_{m-1}(x)&K_m'(x)-\frac{m}{x}K_m(x)=-K_{m+1}(x)\end{array}$\\
+%\tiny级数形式$K_m(x)=(-1)^{m+1}[\gamma+\ln\frac{x}{2}]I_m(x)+\frac{1}{2}\sum_{k=0}^{m-1}(-1)^k\frac{(m-k-1)!}{k!}(\frac{x}{2})^{m-2k}+\frac{(-1)^m}{2}\sum_{k=0}^{\infty}\frac{1}{k!(m+k)!}[\phi(m+k)+\phi(k)](\frac{x}{2})^{m+2k}$~~~~~~~~其中$\phi(k)=\sum_{n=1}^k\frac{1}{n}$\scriptsize\\
+%均没有正零点~~~~当$x\to0$，$K_m(0)\to+\infty$，$I_m(x)\to0$或$1$\\
+\textbf{柱形边界条件总结}~~~~第一类边界条件$R(\rho)|_{\rho=\rho_0}=0\Longrightarrow J_m(\lambda\rho_0)=0$\\
+\indent$\Longrightarrow\lambda_{mn}=\frac{\mu_{mn}}{\rho_0}\Longrightarrow\int_0^{\rho_0}x[J_m(\lambda_{mn}x)]^2dx=\frac{\rho_0^2}{2}[J_{m+1}(\mu_{mn})]^2$\\
+第二类边界条件$\frac{dR}{d\rho}|_{\rho_0}=0\Longrightarrow J_m'(\lambda\rho_0)=0$(此处$\mu_{mn}$--$J_m'(x)$的第$n$个零点)\\
+\indent$\Longrightarrow\lambda_{mn}=\frac{\mu_{mn}}{\rho_0}\Longrightarrow\int_0^{\rho_0}x[J_m(\lambda_{mn}x)]^2dx=\frac{1}{2}(\rho_0^2-\frac{m^2}{\lambda_{mn}^2})[J_m(\mu_{mn})]^2$\\
+第三类边界条件$R(\rho_0)+HR'(\rho_0)=0\Longrightarrow J_m(\lambda\rho_0)+H\lambda J_m'(\lambda\rho_0)=0$\\
+\indent(此处$\mu_{nm}$--$J_m(x)+H\lambda J_m'(x)$零点)$\Longrightarrow\lambda_{mn}=\frac{\mu_{mn}}{\rho_0}$\\
+\indent$\Longrightarrow\int_0^{\rho_0}x[J_m(\lambda_{mn}x)]^2dx=\frac{1}{2}(\rho_0^2-\frac{m^2}{\lambda_{mn}^2}+\frac{\rho_0^2}{\lambda_{mn}^2H})[J_m(\mu_{mn})]^2$
+\end{multicols}
+
+\begin{multicols}{2}
+\textbf{勒让德多项式}\\
+\textbf{勒让德方程}$\frac{1}{\sin\theta}\frac{d}{d\theta}(\sin\theta\frac{d\Theta}{d\theta})=l(l+1)\Theta$\\
+\indent或令$x=\cos\theta,y(x)=\Theta(\theta)$化为$(1-x^2)y''-2xy'+l(l+1)y=0$\\
+\indent\tiny设方程有幂级数解$y=\sum_{k=0}^{\infty}C_kx^k$代入比较系数\scriptsize\\
+\indent得双间隔系数递推公式$C_{k+2}=\frac{(k-l)(k-+l+1)}{(k+2)(k+1)}C_k$\\
+\indent方程通解为$y(x)=C_0y_0(x)+C_1y_1(x)$\\
+\indent\scriptsize其中$\left\{\begin{array}{ll}y_0(x)=&1-\frac{l(l+1)}{2!}x^2+\frac{(l-2)l(l+1)(l+3)}{4!}x^4-\frac{(l-4)(l-2)l(l+1)(l+3)(l+5)}{6!}\\&x^6+\frac{(l-6)(l-4)(l-2)l(l+1)(l+3)(l+5)(l+7)}{8!}x^8-\cdots\\y_1(x)=&x-\frac{(l-1)(l+2)}{3!}x^3+\frac{(l-3)(l-1)(l+2)(l+4)}{5!}x^5\\&-\frac{(l-5)(l-3)(l-1)(l+2)(l+4)(l+6)}{7!}x^7+\cdots\end{array}\right.$\scriptsize\\
+\indent收敛半径$R=\lim_{k\to\infty}|\frac{C_k}{C_{k+2}}|=1$\\
+\indent\tiny当取$l$偶数，则$y_0(x)$截断为偶次幂多项式$y_0(x)=C_0+C_2x^2+\cdots+C_lx^l$\scriptsize\\
+\indent\tiny当取$l$奇数，则$y_1(x)$截断为奇次幂多项式$y_1(x)=C_1+C_3x^3+\cdots+C_lx^l$\scriptsize\\
+\indent取$C_l=\frac{(2l)!}{2^l(l!)^2}$得\textbf{$l$阶勒让德多项式}$P_l(x)=\frac{1}{2^l}\sum_{m=0}^M(-1)^m\frac{(2l-2m)!}{m!(l-m)!(l-2m)!}x^{l-2m}$\\
+\indent\tiny其中$M=\left\{\begin{array}{ll}\frac{l}{2}&(l=0,2,4,\cdots)\\\frac{l-1}{2}&(l=1,3,5,\cdots)\end{array}\right.$\scriptsize\\
+低阶多项式$\left\{\begin{array}{ll}P_0(x)=1&P_1(x)=x\\P_2(x)=\frac{1}{2}(3x^2-1)&P_3(x)=\frac{1}{2}(5x^3-3x)\\P_4(x)=\frac{1}{8}(35x^4-30x^2+3)&P_5(x)=\frac{1}{8}(63x^5-70x^3+15x)\end{array}\right.$\\
+$l$偶$P_l(x)$偶，$l$奇$P_l(x)$奇~~~~~~~~$P_l(1)=1,\forall l$\\
+通解为$y(x)=AP_l(x)+Q_l(x)$~~~~~~~~其中$P_l(x)$--被截断多项式~~~~~~~~$Q_l(x)$--无穷级数\\
+\indent勒氏多项式还可写成$P_l(x)=$\\
+\indent$\frac{(2l-1)(2l-3)\cdots1}{l!}\cdot[x^l-\frac{1}{2}\frac{l(l-1)}{(2l-1)}x^{l-2}+\frac{1}{2\cdot4}\frac{l(l-1)(l-2)(l-3)}{(2l-1)(2l-3)}x^{l-4}]-\cdots$\\
+\textbf{微分表示}(罗德里格斯公式)$P_l(x)=\frac{1}{2^ll!}\frac{d^l}{dx^l}(x^2-1)^l$\\
+\textbf{积分表示}$P_l(x)=\frac{1}{2\pi}\int_0^{\pi}(x+\sqrt{x^2-1}\cos\phi)^ld\phi$\\
+\indent对施列夫利积分$P_l(x)=\frac{1}{2^l2\pi i}\oint_C\frac{(\xi^2-1)^l}{(\xi-x)^{l+1}}d\xi$取C为$\xi=x+\sqrt{x^2-1}e^{i\phi}$\\
+\textbf{生成函数}$\frac{1}{\sqrt{1-2rx+r^2}}=\left\{\begin{array}{ll}\sum_{i=0}^{\infty}r^lP_l(x)&|r|<1\\\sum_{l=0}^{\infty}\frac{1}{r^{l+1}}P_l(x)&r>1\end{array}\right.$\\
+\textbf{递推公式}对$n=1,2,3,\cdots$有$(n+1)P_{n+1}(x)=(2n+1)xP_n(x)-nP_{n-1}(x)$\\
+\indent\indent$P_n(x)=P_{n+1}'(x)-2xP_n'(x)+P_{n-1}'(x)$\\
+\indent\indent$xP_n'(x)-P_{n-1}'(x)=nP_n(x)$\\
+\indent\indent$P_{n+1}'(x)-P_{n-1}'(x)=(2n+1)P_n(x)$\\
+\indent\indent$nP_{n+1}'(x)+(n+1)P_{n-1}'(x)=(2n+1)xP_n'(x)$\\
+\indent\indent 对$n=0,1,2,\cdots$有$P_{n+1}'(x)=(n+1)P_n(x)+xP_x'(x)$\\
+\indent莱布尼兹乘积微分法$\frac{d^n}{dx^n}(f\cdot g)=\sum_{k=0}^n\frac{n!}{(n-k)!k!}\frac{d^kf}{dx^k}\frac{d^{n-k}g}{dx^{n-k}}$\\
+\indent$P_l(1)=1$~~~~$P_l'(1)=\frac{l(l+1)}{2}$~~~~$P_l(-1)=(-1)^l$~~~~$P_l'(-1)=(-1)^{l-1}\frac{l(l+1)}{2}$\\
+\indent$P_{2n}(0)=(-1)^n\frac{(2n)!}{2^{2n}(n!)^2}$~~~~$P_{2n+1}(0)=0$\\
+\indent$P_{2n}(0)-P_{2n+2}(0)=(-1)^n(\frac{4n+3}{n+1})\frac{(2n)!}{2^{2n+1}(n!)^2}$\\
+\indent$P_l(x)$与$k<l$次多项式正交$\int_{-1}^1f(x)P_l(x)dx=0$\\
+\textbf{正交性\&模值}$\int_{-1}^1P_l(x)P_m(x)=\frac{2}{2l+1}\delta_{lm}$\\
+\indent\indent对$l\neq m$有$\int_x^1P_l(x)P_m(x)dx=-\int_{-1}^x=\frac{(1-x^2)[P_l(x)P_m'(x)-P_m(x)P_l'(x)]}{m(m+1)-l(l+1)}$\\
+\textbf{完备性}对在$[-1,1]$上(分段)光滑的$f(x)$按勒让德多项式级数展开\\
+\indent$\left.\begin{array}{lr}\text{连续点}&f(x)\\\text{间断点}&\frac{f(x-0)+f(x+0)}{2}\end{array}\right\}=\sum_{l=0}^{\infty}C_lP_l(x)$其中$C_l=\frac{2l+1}{2}\int_{-1}^1P_l(x)f(x)dx$\\
+\textbf{连带勒让德方程}$\frac{1}{\sin\theta}\frac{d}{d\theta}(\sin\theta\frac{d\Theta}{d\theta})+[l(l+1)-\frac{m^2}{\sin^2\theta}]\Theta=0$\tiny~~~~$m=0,1,2,\cdots$~~$l\in\mathbb{R}$\scriptsize\\
+令$x=\cos\theta$化为$(1-x^2)\frac{d^2y}{dx^2}-2x\frac{dy}{dx}+[l(l+1)-\frac{m^2}{1-x^2}]y$~~~~其通解为\\
+\textbf{连带勒让德函数}$P_l^m(x)=(1-x^2)^{m/2}P_l^{(m)}(x)$~~~~$m=0,\pm1,\pm2,\cdots,\pm l$\\
+\indent\textbf{微分表示(罗德里格斯公式)}$P_l^m(x)=\frac{(1-x^2)^{\frac{m}{2}}}{2^ll!}\frac{d^{l+m}}{dx^{l+m}}(x^2-1)^l$\\
+\indent$P_l^{-m}(x)=(-1)^m\frac{(l-m)!}{(l+m)!}P_l^m(x)=\frac{(1-x^2)^{-m/2}}{2^ll!}\frac{d^{l-m}}{dx^{l-m}}(x^2-1)^l$\\
+\indent或$\Theta(\theta)=P_l^m(\cos\theta)$~~~~$m=0,\pm1,\pm2,\cdots,\pm l$~~~~当$m>l$，$P_l^m(x)=0$\\
+低阶连带勒氏函数$\left\{\begin{array}{ll}P_l^0(x)=P_l(x)\\P_1^1(x)=\sqrt{1-x^2}&P_1^{-1}(x)=-\frac{1}{2}\sqrt{1-x^2}\\P_2^1(x)=3x\sqrt{1-x^2}&P_2^{-1}(x)=-\frac{1}{2}x\sqrt{1-x^2}\\P_2^2(x)=3(1-x^2)&P_2^{-2}(x)=\frac{1}{8}(1-x^2)\\P_3^1(x)=\frac{3}{2}(1-x^2)^{\frac{1}{2}}(5x^2-1)&P_3^{-1}(x)=-\frac{1}{12}P_3^1(x)\\P_3^2(x)=15(1-x^2)x&P_3^{-2}(x)=\frac{1}{8}(1-x^2)x\\P_3^3(x)=15(1-x^2)^{\frac{3}{2}}&P_3^{-3}(x)=-\frac{1}{48}(1-x^2)^{\frac{3}{2}}\end{array}\right.$\\
+\textbf{积分表示(施列夫利积分)}$P_l^m(x)=\frac{(1-x^2)^{\frac{m}{2}}}{2^l}\frac{1}{2\pi i}\frac{(l+m)!}{l!}\oint_C\frac{(z^2-1)^l}{(z-x)^{l+m+1}}dz$\\
+\indent其中$C$为围绕$z=x$的任一闭合回路，取$C$为半径为$\sqrt{x^2-1}$的圆周得\\
+\indent\textbf{拉普拉斯积分}$P_l^m(x)=\frac{i^m}{2\pi}\frac{(l+m)!}{l!}\int_{-\pi}^{\pi}e^{-im\psi}[\cos\theta+i\sin\theta\cos\psi]^ld\psi$\\
+\textbf{递推公式}$\left\{\begin{array}{l}(2k+1)xP_k^m(x)=(k+m)P_{k-1}^m(x)+(k-m+1)P_{k+1}^m(x)\\(2k+1)(1-x^2)^{1/2}P_k^m(x)=P_{k+1}^{m+1}(x)-P_{k-1}^{m+1}(x)\\(2k+1)(1-x^2)^{1/2}P_k^m(x)=(k+m)(k+m-1)P_{k-1}^{m-1}(x)\\~~~~-(k-m+2)(k-m+1)P_{k+1}^{m-1}(x)\\(2k+1)(1-x^2)\frac{dP_k^m(x)}{dx}=(k+1)(k+m)P_{k-1}^m(x)\\~~~~-k(k-m+1)P_{k+1}^m(x)\end{array}\right.k\geq1$\\
+\textbf{正交性\&模值}$\int_{-1}^1P_l^m(x)P_k^m(x)=\frac{2}{2l+1}\frac{(l+m)!}{(l-m)!}\delta_{lk}$\\
+\textbf{完备性}对非负整数$m$，区间$[-1,1]$上分段光滑函数$f(x)$可作连带勒让德级数展开\\
+\indent$f(x)=\sum_{l=m}^{\infty}C_lP_l^m(x)$~~~~~~~~其中$C_l=\frac{2l+1}{2}\frac{(l-m)!}{(l+m)!}\int_{-1}^1f(x)P_l^m(x)dx$\\
+\textbf{球谐函数}$Y_l^m(\theta,\phi)=P_l^{|m|}(\cos\theta)e^{im\phi}\left\{\begin{array}{l}l=0,1,2,\cdots\\m=0,\pm1,\pm2,\cdots,\pm l\end{array}\right.$\\
+\indent是方程$\frac{1}{\sin\theta}\frac{\partial}{\partial\theta}(\sin\theta\frac{\partial Y}{\partial\theta})+\frac{1}{\sin^2\theta}\frac{\partial^2Y}{\partial\phi^2}+l(l+1)Y=0$的通解\\
+\textbf{正交性\&模值}$\int_{\theta=0}^{\pi}\int_{\phi=0}^{2\pi}Y_l^m(\theta,\phi)Y_k^n(\theta,\phi)\sin\theta d\theta d\phi=\frac{4\pi}{2l+1}\frac{(l+m)!}{(l-m)!}\delta_{mn}\delta_{lk}$\\
+低阶归一化球谐函数$\left\{\begin{array}{ll}Y_{0,0}(\theta,\phi)=\frac{1}{\sqrt{4\pi}}&Y_{2,\pm2}=\sqrt{\frac{15}{32\pi}}\sin^2\theta e^{\pm2i\phi}\\Y_{1,0}=\sqrt{\frac{3}{4\pi}}\cos\theta&Y_{1,\pm1}=\mp\sqrt{\frac{3}{8\pi}}\sin\theta e^{\pm i\phi}\\Y_{2,0}=\sqrt{\frac{5}{16\pi}}(3\cos^2\theta-1)&Y_{2,\pm1}=\mp\sqrt{\frac{15}{8\pi}}\cos\theta\sin\theta e^{\pm i\phi}\end{array}\right.$
+\textbf{完备性}定义在球面上函数$f(\theta,\phi)$可展开为$f(\theta,\phi)=\sum_{l=1}^m\sum_{m=-l}^lC_l^mP_l^{|m|}(\cos\theta)e^{im\phi}=\sum_{m=0}^{\infty}\sum_{l=-m}^{m}C_l^mP_l^{|m|}(\cos\theta)e^{im\phi}$\\
+\indent其中$C_l^m=\frac{2l+1}{4\pi}\frac{(l-|m|)!}{(l+|m|)!}\int_0^{\pi}\int_0^{2\pi}f(\theta,\phi)P_l^{|m|}(\cos\theta)e^{-im\phi}\sin\theta d\theta d\phi$\\
+\tiny\textbf{球谐函数}另一种定义$Y_l^m(\theta,\phi)=P_l^m(\cos\theta)\left\{\begin{array}{l}\sin m\phi\\\cos m\phi\end{array}\right\}\left(\begin{array}{l}m=0,1,2,\cdots,l\\l=0,1,2,\cdots\end{array}\right)$\\
+\textbf{正交性\&模值}$\int_{-1}^1P_l^m(x)P_k^n(x)dx=\frac{(l+m)!}{(l-m)!}\frac{2}{2l+1}\delta_{mn}\delta{lk}$\\
+\textbf{完备性}定义在球面上函数$f(\theta,\phi)$先对$\phi$做傅里叶级数展开\\
+\indent$f(\theta,\phi)=\sum_{m=0}^{\infty}[A_m(\theta)\cos m\phi+B_m(\theta)\sin m\phi]$\\
+\indent其中$\left\{\begin{array}{l}A_m(\theta)=\frac{1}{\delta_m}\int_0^{2\pi}f(\theta,\phi)\cos m\phi d\phi\\B_m(\theta)=\frac{1}{\pi}\int_0^{2\pi}f(\theta,\phi)\sin m\phi d\phi\end{array}\right.,\delta_m=\left\{\begin{array}{ll}2&m=0\\1&m=1,2,3,\cdots\end{array}\right.$\\
+\indent再对$A_m$和$B_m$用$P_l^m(\cos\theta)$展开得$\left\{\begin{array}{l}A_m(\theta)=\sum_{l=m}^{\infty}A_l^mP_l^m(\cos\theta)\\B_m(\theta)=\sum_{l=m}^{\infty}B_l^mP_l^m(\cos\theta)\end{array}\right.$\\
+\indent其中$\left\{\begin{array}{l}A_l^m=\frac{2l+1}{2}\frac{(l-m)!}{(l+m)!}\int_0^{\pi}A_m(\theta)P_l^m(\cos\theta)\sin\theta d\theta\\~~~~=\frac{2l+1}{2\pi\delta_m}\frac{(l-m)!}{(l+m)!}\int_0^{\pi}\int_0^{2\pi}f(\theta,\phi)P_l^m(\cos\theta)\cos m\phi\sin\theta d\theta\\B_l^m=\frac{2l+1}{2}\frac{(l-m)!}{(l+m)!}\int_0^{\pi}B_m(\theta)P_l^m(\cos\theta)\sin\theta d\theta\\~~~~=\frac{2l+1}{2\pi}\frac{(l-m)!}{(l+m)!}\int_0^{\pi}\int_0^{2\pi}f(\theta,\phi)P_l^m(\cos\theta)\sin m\phi\sin\theta d\theta d\phi\end{array}\right.$
+\end{multicols}
+
+%\begin{multicols}{2}
+%\textbf{Chap15量子力学薛定谔方程}$i\hbar\frac{\partial\Psi}{\partial t}=-\frac{\hbar^2}{2\mu}\nabla^2\Psi+V(\bm{r})\Psi$\\
+%用于描述质量为$\mu$的微观粒子在势场$V(\bm{r})$中的运动，波函数的模平方$|\Psi(\bm{r},t)|^2$为任意$t$时刻在空间$\bm{r}$处单位体积内发现粒子的概率\\
+%设初始时刻的波函数为$\Psi(\bm{r},0)=f(\bm{r})$\\
+%分离变量$\Psi(\bm{r},t)=\psi(\bm{r})T(r)$并利用粒子的哈密顿算符$\hat{H}=-\frac{\hbar^2}{2\mu}\nabla^2+V(\bm{r})$得\\
+%$i\hbar\frac{dT}{dt}=\frac{\hat{H}\psi(\bm{r})}{\psi(\bm{r})}\Longrightarrow\left\{\begin{array}{l}\hat{H}\psi(\bm{r})=E\psi(\bm{r})\\\frac{dT}{T}=-\frac{i}{\hbar}Edt\end{array}\right.\Longrightarrow T(t)=c\exp(-i\frac{i}{\hbar}Et)$\\
+%$\Longrightarrow\Psi_(\bm{r},t)=\sum_nc_n\psi_n(\bm{r})\exp(-\frac{i}{\hbar}E_nt)$\\
+%由$\hat{H}$为厄米算符，其本征函数满足正交性$\int\psi_m^*(\bm{r})\psi_n(\bm{r})d\bm{r}=\delta_{mn}$\\
+%故$c_n=\int\psi_n*(\bm{r})f(\bm{r})d\bm{r}$\\
+%\textbf{量子谐振子}薛氏方程$i\hbar\frac{\partial\Psi}{\partial t}=-\frac{\hbar^2}{2\mu}\frac{\partial^2\Psi}{\partial x^2}+\frac{1}{2}\mu\omega^2x^2\Psi(x,t)$\\
+%\indent分离变量$\Psi(x,t)=\phi(x)T(t)$得\\
+%\indent$-\frac{\hbar^2}{2\mu}\frac{d^2\phi}{dx^2}+\frac{1}{2}\mu\omega^2x^2\phi(x)=E\phi(x)$~~~~$\frac{dT}{T}=-\frac{i}{\hbar}Edt\Longrightarrow T(t)=\exp(-\frac{i}{\hbar}Et)$
+%\end{multicols}
+
+\tiny\begin{multicols}{2}
+%\noindent\textbf{矢量微分算子}$\nabla=\frac{\partial}{\partial x}\bm{i}+\frac{\partial}{\partial y}\bm{j}+\frac{\partial}{\partial z}\bm{k}$~~~~~~~~\textbf{梯度}$\nabla u=\frac{\partial u}{\partial x}\bm{i}+\frac{\partial u}{\partial y}\bm{j}+\frac{\partial u}{\partial z}\bm{k}$~~~~~~~~\textbf{散度}$\nabla\cdot\bm{E}=\frac{\partial E_x}{\partial x}+\frac{\partial E_y}{\partial y}+\frac{\partial E_z}{\partial z}$\\
+\textbf{旋度}$\nabla\times\bm{E}=[\bm{i}~\bm{j}~\bm{k};\frac{\partial}{\partial x}~\frac{\partial}{\partial y}~\frac{\partial}{\partial z};E_x~E_y~E_x]=(\frac{\partial E_z}{\partial y}-\frac{\partial E_y}{\partial z})\bm{i}+(\frac{\partial E_x}{\partial z}-\frac{\partial E_z}{\partial x})\bm{j}+(\frac{\partial E_y}{\partial x}-\frac{\partial E_x}{\partial y})\bm{k}$\\
+%\textbf{拉普拉斯算子}$\nabla^2=\frac{\partial^2}{\partial x^2}+\frac{\partial^2}{\partial y^2}+\frac{\partial^2}{\partial z^2}$~~~~~~~~作用于函数$\nabla^u=\nabla\cdot(\nabla u)=\frac{\partial^2u}{\partial x^2}+\frac{\partial^2u}{\partial y^2}+\frac{\partial^2u}{\partial z^2}$\\
+%\indent作用于矢量$\nabla^2\bm{E}=(\nabla^2E_x)\bm{i}+(\nabla^2E_y)\bm{j}+(\nabla^2E_z)\bm{k}$\\
+标量场的梯度无旋$\nabla\times\nabla\phi=0$~~~~~~~~矢量场的旋度无源$\nabla\times\nabla\times\bm{f}=0$\\
+$\nabla(\phi\psi)=\phi\nabla\psi+\psi\nabla\phi~~~~~~~~\nabla\cdot(\phi\bm{f})=(\nabla\phi)\cdot\bm{f}+\phi\nabla\cdot\bm{f}$\\
+$\nabla\times(\phi\bm{f})=(\nabla\phi)\times\bm{f}+\phi\nabla\times\bm{f}~~~~~~~~\nabla\cdot(\bm{f}\times\bm{g})=(\nabla\times\bm{f})\cdot\bm{g}-\bm{f}\cdot(\nabla\times\bm{g})$\\
+$\nabla\times(\bm{f}\times\bm{g})=(\bm{g}\cdot\nabla)\bm{f}+(\nabla\cdot\bm{g})\bm{f}-(\bm{f}\cdot\nabla)\bm{g}-(\nabla\cdot\bm{f})\bm{g}$\\
+$\nabla(\bm{f}\cdot\bm{g})=\bm{f}\times(\nabla\times\bm{g})+(\bm{f}\cdot\nabla)\bm{g}+\bm{g}\times(\nabla\times\bm{f})+(\bm{g}\cdot\nabla)\bm{f}$\\
+$\nabla\times(\nabla\times\bm{f})=\nabla(\nabla\cdot\bm{f})-\nabla^2\bm{f}~~~~~~~~\bm{a}\times(\bm{b}\times\bm{c})=\bm{b}(\bm{a}\cdot\bm{c})-\bm{c}(\bm{a}\cdot\bm{b})$\\
+\textbf{高斯定理}$\iint_{\partial V}\bm{E}\cdot d\bm{S}=\iiint\nabla\cdot\bm{E}dV$~~~~~~~~~~~~~~~~\textbf{格林定理}$\nabla\cdot(u\nabla v)=u\nabla\cdot\nabla v+(\nabla u)\cdot(\nabla v)$\\
+\textbf{斯多克斯定理}$\oint_{\partial S}\bm{E}\cdot d\bm{l}=\iint_S(\nabla\times\bm{E})\cdot d\bm{S}$
+\end{multicols}
+
+\begin{table}[h]
+\centering\tiny
+\begin{tabular}{|c|c|c|c|}\hline
+& 直角坐标系 & 柱坐标系 & 球坐标系\\\hline
+直角 & & $x=\rho\cos\phi,y=\rho\sin\phi,z$ & $x=r\sin\theta\cos\phi,y=r\sin\theta\sin\phi,z=r\cos\theta$\\\hline
+柱 & $\rho=\sqrt{x^2+y^2},\phi=\arctan(y/x),z=z$ & & $\rho=r\sin\theta,\phi,z=r\cos\theta$\\\hline
+球 & $r=\sqrt{x^2+y^2+z^2},\theta=\arccos(z/r),\phi=\arctan(y/x)$ & $r=\sqrt{\rho^2+z^2},\theta=\arctan(\rho/z),\phi$ &\\\hline\hline
+矢量$\bm{A}$ & $A_x\hat{x}+A_y\hat{y}+A_z\hat{z}$ & $A_{\rho}\hat{\rho}+A_{\phi}\hat{\phi}+A_z\hat{z}$ & $A_{r}\hat{r}+A_{\theta}\hat{\theta}+A_{\phi}\hat{\phi}$\\\hline
+梯度$\nabla f$ & $\frac{\partial f}{\partial x}\hat{x}+\frac{\partial f}{\partial y}\hat{y}+\frac{\partial f}{\partial z}\hat{z}$ & $\frac{\partial f}{\partial\rho}\hat{\rho}+\frac{1}{\rho}\frac{\partial f}{\partial\phi}\hat{\phi}+\frac{\partial f}{\partial z}\hat{z}$ & $\frac{\partial f}{\partial r}\hat{r}+\frac{1}{r}\frac{\partial f}{\partial\theta}\hat{\theta}+\frac{1}{r\sin\theta}\frac{\partial f}{\partial\phi}\hat{\phi}$\\\hline
+散度$\nabla\cdot\bm{A}$ & $\frac{\partial A_x}{\partial x}+\frac{\partial A_y}{\partial y}+\frac{\partial A_z}{\partial z}$ & $\frac{1}{\rho}\frac{\partial(\rho A_{\rho})}{\partial\rho}+\frac{1}{\rho}\frac{\partial A_{\phi}}{\partial\phi}+\frac{\partial A_z}{\partial z}$ & $\frac{1}{r^2}\frac{\partial(r^2A_r)}{\partial r}+\frac{1}{r\sin\theta}\frac{\partial(A_{\theta}\sin\theta)}{\partial\theta}+\frac{1}{r\sin\theta}\frac{\partial A_{\phi}}{\partial\phi}$\\\hline
+旋度$\nabla\times\bm{A}$ & $\begin{array}{l}(\frac{\partial A_z}{\partial y}-\frac{\partial A_y}{\partial z})\hat{x}+(\frac{\partial A_x}{\partial z}-\frac{\partial A_z}{\partial x})\hat{y}\\+(\frac{\partial A_y}{\partial x}-\frac{\partial A_x}{\partial y})\hat{z}\end{array}$ & $\begin{array}{l}(\frac{1}{\rho}\frac{\partial A_z}{\partial\phi}-\frac{\partial A_{\phi}}{\partial z})\hat{\rho}+(\frac{\partial A_{\rho}}{\partial z}-\frac{\partial A_z}{\partial\rho})\hat{\phi}\\+\frac{1}{\rho}(\frac{\partial(\rho A_{\phi})}{\partial\rho}-\frac{\partial A_{\rho}}{\partial\phi})\hat{z}\end{array}$ & $\begin{array}{l}\frac{1}{r\sin\theta}(\frac{\partial(A_{\phi}\sin\theta)}{\partial\theta}-\frac{\partial A_{\theta}}{\partial\phi})\hat{r}+\frac{1}{r}(\frac{1}{\sin\theta}\frac{\partial A_r}{\partial\phi}-\frac{\partial(rA_{\phi})}{\partial r})\hat{\theta}\\+\frac{1}{r}(\frac{\partial(rA_{\theta})}{\partial r}-\frac{\partial A_r}{\partial\theta})\hat{\phi}\end{array}$\\\hline
+拉普拉斯算子$\nabla^2$ & $\frac{\partial^2}{\partial x^2}+\frac{\partial^2}{\partial y^2}+\frac{\partial^2}{\partial z^2}$ & $\frac{1}{\rho}\frac{\partial}{\partial\rho}(\rho\frac{\partial u}{\partial\rho})+\frac{1}{\rho^2}\frac{\partial^2}{\partial\phi^2}+\frac{\partial^2}{\partial z^2}$ & $\frac{1}{r^2}\frac{\partial}{\partial r}(r^2\frac{\partial}{\partial r})+\frac{1}{r^2\sin\theta}\frac{\partial}{\partial\theta}(\sin\theta\frac{\partial}{\partial\theta})+\frac{1}{r^2\sin^2\theta}\frac{\partial^2}{\partial\phi^2}$\\\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering\tiny
+\begin{tabular}{|c|c|c|c|}
+\hline
+\multicolumn{4}{|c|}{泛定方程$\frac{\partial^2u}{\partial t^2}=a^2\frac{\partial^2u}{\partial x^2}$和$\frac{\partial u}{\partial t}=a^2\frac{\partial^2u}{\partial x^2}$(分离变量得方程$X''(x)+\lambda X(x)=0$)的常用本征函数及其本征值} \\\hline
+边界条件 & 本征值$\lambda_n$ & \multicolumn{2}{|c|}{本征函数}\\\hline
+$u|_{x=0}=0,u|_{x=L}=0$ & $(\frac{n\pi}{L})^2$ & \multicolumn{2}{|c|}{$B_n\sin\frac{n\pi}{L}x,n=1,2,3\cdots$}\\\hline
+$u|_{x=0}=0,u_x|_{x=L}=0$ & $[\frac{(2n+1)\pi}{2L}]^2$ & \multicolumn{2}{|c|}{$B_n\sin\frac{(2n+1)\pi}{2L}x,n=0,1,2,\cdots$}\\\hline
+$u_x|_{x=0}=0,u|_{x=L}=0$ & $[\frac{(2n+1)\pi}{2L}]^2$ & \multicolumn{2}{|c|}{$A_n\cos\frac{(2n+1)\pi}{2L}x,n=0,1,2,\cdots$}\\\hline
+$u_x|_{x=0}=0,u_x|_{x=L}=0$ & $[\frac{n\pi}{L}]^2$ & \multicolumn{2}{|c|}{$A_n\cos\frac{n\pi}{L}x,n=0,1,2,\cdots$}\\\hline
+$u|_{x=0}=0,[u+u_x]|_{x=L}=0$ & $\mu_n^2,\text{ s.t. }\tan\mu_nL=-\mu_n$ & \multicolumn{2}{|c|}{$\sin\mu_nx,n=1,2,\cdots$}\\\hline
+$u_x|_{x=0}=0,[u+u_x]|_{x=L}=0$ & $\mu_n^2,\text{ s.t. }\cot\mu_nL=\mu_n$ & \multicolumn{2}{|c|}{$\cos\mu_nx,n=1,2,\cdots$}\\\hline
+$u|_{x=0}=0,[u-u_x/2]|_{x=L}=0$ & $-\mu_0^2,\mu_n^2,\text{ s.t. }\tanh\mu_0L=\mu_0/2,\tan\mu_nL=\mu_n/2$ & \multicolumn{2}{|c|}{$\sinh\mu_0x,\sinh\mu_nx,n=1,2,\cdots$}\\\hline
+$u_x|_{x=0}=0,[u-u_x/2]|_{x=L}=0$ & $-\mu_0^2,\mu_n^2,\text{ s.t. }\coth\mu_0L=\mu_0/2,\cot\mu_nL=-\mu_n/2$ & \multicolumn{2}{|c|}{$\cosh\mu_0x,\cos\mu_nx,n=1,2,\cdots$}\\\hline
+$[u+u_x]|_{x=0}=0,[u+u_x]|_{x=L}=0$ & $-1,(\frac{n\pi}{L})^2$ & \multicolumn{2}{|c|}{$e^{-x},\frac{n\pi}{L}\cos\frac{n\pi}{L}x-\sin\frac{n\pi}{L}x,n=1,2,\cdots$}\\\hline
+$[u-u_x]|_{x=0}=0,[u-u_x]|_{x=L}=0$ & $-1,(\frac{n\pi}{L})^2$ & \multicolumn{2}{|c|}{$e^x,\frac{n\pi}{L}\cos\frac{n\pi}{L}x+\sin\frac{n\pi}{L}x,n=1,2,\cdots$}\\\hline
+$[u-u_x]|_{x=0}=0,[u+u_x]|_{x=L}=0$ & $\mu_n^2,\text{ s.t. }\tan\mu_n=\frac{2\mu_n}{\mu_n^2-1}$ & \multicolumn{2}{|c|}{$\mu_n\cos\mu_nx+\sin\mu_nx,n=1,2,\cdots$}\\\hline
+$[u+u_x]|_{x=0}=0,[u-u_x]|_{x=L}=0$ & $-\mu_0^2,\mu_n^2,\text{ s.t. }\tan\mu_0=\frac{2\mu_0}{\mu_0^2-1},\tan\mu_n=-\frac{2\mu_n}{\mu_n^2-1}$ & \multicolumn{2}{|c|}{$\mu_0\cosh\mu_0x-\sinh\mu_0x,\mu_n\cos\mu_nx-\sin\mu_nx,n=1,\cdots$}\\\hline
+\multicolumn{2}{|c|}{非齐次边界条件} & \multicolumn{2}{|c|}{非齐次边界条件辅助函数$\Omega$}\\\hline
+\multicolumn{2}{|c|}{$u|_{x=0}=u_1(t),u|_{x=L}=u_2(t)$} & \multicolumn{2}{|c|}{$[u_2(t)-u_1(t)]/L+u_1(t)$}\\\hline
+\multicolumn{2}{|c|}{$u|_{x=0}=u_1(t),u_x|_{x=L}=u_2(t)$} & \multicolumn{2}{|c|}{$u_2(t)x+u_1(t)$}\\\hline
+\multicolumn{2}{|c|}{$u_x|_{x=0}=u_1(t),u|_{x=L}=u_2(t)$} & \multicolumn{2}{|c|}{$u_1(t)x+u_2(t)-Lu_1(t)$}\\\hline
+\multicolumn{2}{|c|}{$u_x|_{x=0}=u_1(t),u_x|_{x=L}=u_2(t)$} & \multicolumn{2}{|c|}{$[u_2(t)x-u_1(t)]/(2L)+u_1(t)x$}\\\hline
+\multicolumn{2}{|c|}{傅里叶变换表} & \multicolumn{2}{|c|}{拉普拉斯变换表}\\\hline
+$f(t)=\mathcal{F}^{-1}[F(\omega)]$ & $F(\omega)=\mathcal{F}[f(t)]$ & $f(t)=\mathcal{L}^{-1}[F(p)]$ & $F(p)=\mathcal{L}[f(t)]$\\\hline
+矩形脉冲$\left\{\begin{array}{ll}E&|t|\leq\frac{\tau}{2}\\0&\text{otherwise}\end{array}\right.$ & $\left\{\begin{array}{ll}2E\frac{\sin\frac{\omega\tau}{2}}{\omega}&\omega\neq0\\E\tau&\omega=0\end{array}\right.$ & 单位阶跃$u(t)$ & $\frac{1}{p}$\\\hline
+半边指数衰减$\left\{\begin{array}{ll}0&t<0\\e^{-\beta t}&t\geq0\end{array}\right.$ & $\frac{1}{\beta+i\omega}$ & $\frac{t^m}{\Gamma(m+1)},m>-1$ & $\frac{1}{p^{m+1}}$\\\hline
+双边指数衰减$Ee^{-a|t|}$ & $\frac{2aE}{a^2+\omega^2}$ & $\frac{t^n}{n!},n=0,1,2,\cdots$ & $\frac{1}{p^{n+1}}$\\\hline
+钟形脉冲$Ae^{-\beta t^2}$ & $\sqrt{\frac{\pi}{\beta}}Ae^{-\frac{\omega^2}{4\beta}}$ & $e^{kt}$ & $\frac{1}{p-k}$\\\hline
+傅里叶核$\frac{\sin\omega_0t}{\pi t}$ & $\left\{\begin{array}{ll}1&|\omega|\leq\omega_0\\0&\text{otherwise}\end{array}\right.$ & $\sin\beta t$ & $\frac{\beta}{p^2+\beta^2}$\\\hline
+高斯分布$\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{t^2}{2\sigma^2}}$ & $e^{-\frac{\sigma^2\omega^2}{2}}$ & $\cos\beta t$ & $\frac{p}{p^2+\beta^2}$\\\hline
+单位脉冲$\delta(t)$ & $1$ & $\sinh\beta t$ & $\frac{\beta}{p^2-\beta^2}$\\\hline
+余弦$\cos\omega_0t$ & $\pi[\delta(\omega+\omega_0)+\delta(\omega-\omega_0)]$ & $\cosh\beta t$ & $\frac{p}{p^2-\beta^2}$\\\hline
+正弦$\sin\omega_0t$ & $i\pi[\delta(\omega+\omega_0)-\delta(\omega-\omega_0)]$ & 单位脉冲$\delta(t)$ & $1$\\\hline
+单位阶跃$u(t)$ & $\frac{1}{i\omega}+\pi\delta(\omega)$ & $\delta(t-a)$ & $e^{-ap}$\\\hline
+直流$E$ & $2\pi E\delta(\omega)$ & $\delta'(t)$ & $p$\\\hline
+指数$e^{i\omega_0t}$ & $2\pi\delta(\omega-\omega_0)$ & $\frac{1}{\sqrt{\pi t}}$ & $\frac{1}{\sqrt{p}}$\\\hline
+$t$ & $2i\pi\delta'(\omega)$ & $2\sqrt{\frac{t}{\pi}}$ & $\frac{1}{p\sqrt{p}}$\\\hline
+$t^n$ & $2i^n\pi\delta^{(n)}(\omega)$ & $t$ & $\frac{1}{p^2}$\\\hline
+$\frac{1}{a^2+t^2}$ & $\frac{\pi}{a}e^{-a|\omega|}$ & $a^{t/\tau}$ & $\frac{1}{p-(\ln a)/\tau}$\\\hline
+\end{tabular}
+\end{table}
+\end{document}
